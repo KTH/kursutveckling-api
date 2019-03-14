@@ -5,7 +5,7 @@
     "description": "Template API project for Node.js",
     "version": "1.0.0"
   },
-  "basePath": "/api/kursinfo",
+  "basePath": "/api/kursutveckling",
   "produces": [
     "application/json"
   ],

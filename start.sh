@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOG_DIR=logs
-PROJECT=kursinfo-api
+PROJECT=kursutveckling-api
 
 if [ "$1" = "ref" ] ; then
   LOG_DIR=/var/log/$PROJECT
