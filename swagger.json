@@ -83,13 +83,6 @@
         "description": "Saves changes to an object in the database",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "Id of the round.semester.year.x to get analysis data",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "roundAnalysisData",
             "in": "body",
             "description": "Analysis data for a specific round ",
@@ -134,15 +127,68 @@
   "definitions": {
     "Data": {
       "properties": {
+        "round": {
+          "type": "string",
+          "description": "Unique identifier representing some specific data"
+        },
         "courseCode": {
           "type": "string",
           "description": "Unique identifier representing some specific data"
         },
-        "comment_en": {
+        "programmeCodes": {
           "type": "string",
           "description": "Description of the data"
         },
-        "comment_sv": {
+        "examiners": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "responsibles": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "examinationRounds": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "registeredStudents": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "examinationGrade": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "alterationText": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "commentExam": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "commentChange": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "isPublished": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Description of the data"
+          
+        },
+        "pdfAnalysisDate": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "changedDate": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "changedBy": {
           "type": "string",
           "description": "Description of the data"
         }
@@ -154,18 +200,71 @@
           "courseCode"
           ],
           "properties": {
-            "courseCode": {
-              "description": "Id for request",
-              "type": "string"
-            },
-            "comment_en": {
-              "type": "string",
-              "description": "Description of the data"
-            },
-            "comment_sv": {
-              "type": "string",
-              "description": "Description of the data"
-            }
+              "round": {
+                "type": "string",
+                "description": "Unique identifier representing some specific data"
+              },
+              "courseCode": {
+                "type": "string",
+                "description": "Unique identifier representing some specific data"
+              },
+              "programmeCodes": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "examiners": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "responsibles": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "examinationRounds": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "registeredStudents": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "examinationGrade": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "alterationText": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "commentExam": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "commentChange": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "isPublished": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "publishedDate": {
+                "type": "string",
+                "description": "Description of the data"
+                
+              },
+              "pdfAnalysisDate": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "changedDate": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "changedBy": {
+                "type": "string",
+                "description": "Description of the data"
+              }
         }
       },
     "Error": {
