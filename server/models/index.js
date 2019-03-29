@@ -1,3 +1,4 @@
 module.exports = {
-  sample: require('./sample')
+  sample: require('./sample'),
+  roundAnalysis: require('./roundAnalysis')
 }

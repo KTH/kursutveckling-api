@@ -54,6 +54,8 @@ server.set('view engine', 'handlebars')
  */
 const accessLog = require('kth-node-access-log')
 server.use(accessLog(config.logging.accessLog))
+const morgan = require('morgan')
+server.use(morgan(':method :url :status :res[content-length] --kip_kursutveckling_api-- :response-time ms'))
 
 // QUESTION: Should this really be set here?
 // http://expressjs.com/en/api.html#app.set
@@ -120,16 +122,15 @@ addPaths('api', createApiPaths({
 const authByApiKey = passport.authenticate('apikey', { session: false })
 
 // Application specific API enpoints
-const { Sample } = require('./controllers')
+const { Sample, RoundAnalysis } = require('./controllers')
 const ApiRouter = require('kth-node-express-routing').ApiRouter
 const apiRoute = ApiRouter(authByApiKey)
 const paths = getPaths()
 
 // Api enpoints
 apiRoute.register(paths.api.checkAPIkey, System.checkAPIKey)
-
-apiRoute.register(paths.api.getDataById, Sample.getData)
-apiRoute.register(paths.api.postDataById, Sample.postData)
+apiRoute.register(paths.api.getCourseRoundAnalysisDataById, RoundAnalysis.getAnalysis)
+apiRoute.register(paths.api.postCourseRoundAnalysisDataById, RoundAnalysis.postAnalysis)
 server.use('/', apiRoute.getRouter())
 
 // Catch not found and errors

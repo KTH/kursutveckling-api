@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Node API",
-    "description": "Template API project for Node.js",
+    "title": "Kursutveckling API",
+    "description": "Used to collect and show course analysis with some course data",
     "version": "1.0.0"
   },
   "basePath": "/api/kursutveckling",
@@ -40,16 +40,16 @@
         }
       }
     },
-    "/v1/data/{id}": {
+    "/v1/courseRoundAnalysis/{id}": {
       "get": {
-        "operationId": "getDataById",
-        "summary": "Get data",
-        "description": "Gets some form of data that only requires read access",
+        "operationId": "getCourseRoundAnalysisDataById",
+        "summary": "Get all analysis for rounds in a course",
+        "description": "Gets analysis for rounds in a course that only requires read access",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Id of data to get",
+            "description": "Id of the round.semester.year.x to get analysis data",
             "required": true,
             "type": "string"
           }
@@ -78,24 +78,23 @@
         }
       },
       "post": {
-        "operationId": "postDataById",
+        "operationId": "postCourseRoundAnalysisDataById",
         "summary": "Saves an object in the database",
         "description": "Saves changes to an object in the database",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the data to save",
+            "description": "Id of the round.semester.year.x to get analysis data",
             "required": true,
             "type": "string"
           },
           {
-            "name": "data",
+            "name": "roundAnalysisData",
             "in": "body",
-            "description": "The data to save",
-            "required": true,
+            "description": "Analysis data for a specific round ",
             "schema": {
-              "$ref": "#/definitions/Data"
+              "$ref": "#/definitions/roundAnalysis"
             }
           }
         ],
@@ -135,16 +134,40 @@
   "definitions": {
     "Data": {
       "properties": {
-        "id": {
+        "courseCode": {
           "type": "string",
           "description": "Unique identifier representing some specific data"
         },
-        "name": {
+        "comment_en": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "comment_sv": {
           "type": "string",
           "description": "Description of the data"
         }
       }
-    },
+    }, 
+    "roundAnalysis": {
+        "type": "object",
+        "required": [
+          "courseCode"
+          ],
+          "properties": {
+            "courseCode": {
+              "description": "Id for request",
+              "type": "string"
+            },
+            "comment_en": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "comment_sv": {
+              "type": "string",
+              "description": "Description of the data"
+            }
+        }
+      },
     "Error": {
       "properties": {
         "code": {
