@@ -110,6 +110,40 @@
             "write"
           ]
         }
+      },
+      "put": {
+        "operationId": "putCourseRoundAnalysisDataById",
+        "summary": "Saves an object in the database",
+        "description": "Saves changes to an object in the database",
+        "parameters": [
+          {
+            "name": "roundAnalysisData",
+            "in": "body",
+            "description": "Analysis data for a specific round ",
+            "schema": {
+              "$ref": "#/definitions/roundAnalysis"
+            }
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful update"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": {
+          "api_key": [
+            "write"
+          ]
+        }
       }
     }
   },

@@ -19,12 +19,17 @@ function _fetchRoundAnalysisById (id) {
 
 function _storeRoundAnalysis (data) {
   if (!data) throw new Error('data must be set in _storeRoundAnalysis')
-  if (data.id) {
+  if (data._id) {
     log.debug('updating existing roundAnalysis', { data: data })
-    return RoundAnalysis.findOneAndUpdate({ _id: data.id }, { $set: data }, { new: true })
+    return RoundAnalysis.findOneAndUpdate({ _id: data._id }, { $set: data }, { new: true })
   } else {
     log.debug('Storing organization', { data: data })
-    const org = new RoundAnalysis(data)
-    return org.save()
+    const doc = new RoundAnalysis(data)
+    return doc.save()
   }
+}
+
+function _fetchAllRoundAnalysisByCourseCode (courseCode) {
+  log.debug('Fetching all roundAnalysis for ' + courseCode)
+  return User.find(courseCode).populate('courseRoundAnalysis').lean()
 }
