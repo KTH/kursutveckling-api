@@ -4,24 +4,23 @@
  * API controller
  */
 
-const RoundAnalysis = require('../models').roundAnalysis.RoundAnalysis
 const co = require('co')
 const log = require('kth-node-log')
 const db = require('../lib/database')
-const ObjectID = require('mongodb').ObjectID
 
 module.exports = {
   getAnalysis: co.wrap(getRoundAnalysis),
   postAnalysis: co.wrap(postRoundAnalysis),
   putAnalysis: co.wrap(putRoundAnalysis),
-  getAnalysisListByCourseCode: co.wrap(getAnalysisListByCourseCode)
+  getAnalysisList: co.wrap(getAnalysisListByCourseCode),
+  getUsedRounds: co.wrap(getUsedRounds)
 }
 
 function * getRoundAnalysis (req, res, next) {
   try {
     let doc = {}
     if (process.env.NODE_MOCK) {
-      doc = yield { _id: 0, courseCode: 'xx1122', commentSv: 'mockdataSV', commentEn: 'mockdataEN' }
+      doc = yield { _id: 0, courseCode: 'xx1122' }
     } else {
       doc = yield db.fetchRoundAnalysisById(req.params.id)
     }
@@ -61,8 +60,6 @@ function * postRoundAnalysis (req, res, next) {
 function * putRoundAnalysis (req, res, next) {
   try {
     const id = req.body._id
-    const isPublished = req.body.isPublished
-
     log.info('Updating roundAnalysis', { id: id })
 
     const doc = yield db.fetchRoundAnalysisById(id)
@@ -73,8 +70,8 @@ function * putRoundAnalysis (req, res, next) {
     }
 
     req.body.changedDate = new Date()
-    let dbResponse = yield db.storeRoundAnalysis(req.body)
-    console.log('dbResponse', dbResponse)
+    let dbResponse = yield db.updateRoundAnalysis(req.body)
+    // console.log('dbResponse', dbResponse)
 
     log.info('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
@@ -84,6 +81,27 @@ function * putRoundAnalysis (req, res, next) {
   }
 }
 
-function getAnalysisListByCourseCode (req, res, next) {
-  return ''
+function * getAnalysisListByCourseCode (req, res, next) {
+  const courseCode = req.params.courseCode.toUpperCase()
+  try {
+    const dbResponse = yield db.fetchAllRoundAnalysisByCourseCode(courseCode)
+    // console.log(dbResponse)
+    log.info('Successfully got all analysis for', { courseCode: courseCode })
+    res.json(dbResponse)
+  } catch (err) {
+    log.error('Error in getAnalysisListByCourseCode', { error: err })
+    next(err)
+  }
+}
+
+function * getUsedRounds (req, res, next) {
+  const courseCode = req.params.courseCode
+  const semester = req.params.semester
+  try {
+    const dbResponse = db.fetchUsedRounds(courseCode, semester)
+    log.info('Successfully got used round ids for', { courseCode: courseCode, semester: semester })
+    res.json(dbResponse)
+  } catch (error) {
+
+  }
 }

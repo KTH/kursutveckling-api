@@ -12,7 +12,7 @@ const schema = mongoose.Schema({
     type: String,
     required: [true, 'Enter Course Code']
   },
-  round: {
+  analysisName: {
     type: String,
     // required: [true, 'Name is required.'],
     trim: true,
@@ -127,11 +127,25 @@ const schema = mongoose.Schema({
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
+  },
+  semester: {
+    type: String,
+    trim: true,
+    minlength: 0,
+    maxlength: [500, 'Comment must have at most 500 characters.'],
+    default: ''
+  },
+  roundIdList: {
+    type: String,
+    trim: true,
+    minlength: 0,
+    maxlength: [500, 'Comment must have at most 500 characters.'],
+    default: ''
   }
+
 })
 
 const RoundAnalysis = mongoose.model('RoundAnalysis', schema)
-console.log('RoundAnalysis', RoundAnalysis)
 
 module.exports = {
   RoundAnalysis: RoundAnalysis,

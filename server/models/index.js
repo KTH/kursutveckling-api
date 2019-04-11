@@ -1,4 +1,5 @@
 module.exports = {
   sample: require('./sample'),
-  roundAnalysis: require('./roundAnalysis')
+  roundAnalysis: require('./roundAnalysis'),
+  courseUsedRoundsHandler: require('./courseUsedRoundsHandler')
 }

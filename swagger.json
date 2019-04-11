@@ -145,6 +145,44 @@
           ]
         }
       }
+    },
+    "/v1/courseAnalysisList/{courseCode}": {
+      "get": {
+        "operationId": "getAnalysisListByCourseCode",
+        "summary": "Get a list of analysis for a course",
+        "description": "Gets analysis for rounds in a course that only requires read access",
+        "parameters": [
+          {
+            "name": "courseCode",
+            "in": "path",
+            "description": "Id of the course code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested data",
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": {
+          "api_key": [
+            "read"
+          ]
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -161,7 +199,11 @@
   "definitions": {
     "Data": {
       "properties": {
-        "round": {
+        "_id": {
+          "type": "string",
+          "description": "Unique identifier representing some specific data"
+        },
+        "analysisName": {
           "type": "string",
           "description": "Unique identifier representing some specific data"
         },
@@ -225,6 +267,14 @@
         "changedBy": {
           "type": "string",
           "description": "Description of the data"
+        },
+        "semester": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "roundIdList": {
+          "type": "string",
+          "description": "Description of the data"
         }
       }
     }, 
@@ -234,7 +284,7 @@
           "courseCode"
           ],
           "properties": {
-              "round": {
+              "analysisName": {
                 "type": "string",
                 "description": "Unique identifier representing some specific data"
               },
@@ -296,6 +346,13 @@
                 "description": "Description of the data"
               },
               "changedBy": {
+                "type": "string",
+                "description": "Description of the data"
+              }, "semester": {
+                "type": "string",
+                "description": "Description of the data"
+              },
+              "roundIdList": {
                 "type": "string",
                 "description": "Description of the data"
               }

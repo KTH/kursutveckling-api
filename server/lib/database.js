@@ -2,13 +2,17 @@ const ObjectID = require('mongodb').ObjectID
 const { safeGet } = require('safe-utils')
 const log = require('kth-node-log')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
+const CourseUsedRoundsHandler = require('../models/courseUsedRoundsHandler').CourseUsedRoundsHandler
 const co = require('co')
 // const Level = require('../models/level').Level
 // const crypt = require('./crypt')
 
 module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
-  storeRoundAnalysis: _storeRoundAnalysis
+  storeRoundAnalysis: _storeRoundAnalysis,
+  updateRoundAnalysis: _updateRoundAnalysis,
+  fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode
+  // fetchUsedRounds: _fetchUsedRounds
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -19,17 +23,44 @@ function _fetchRoundAnalysisById (id) {
 
 function _storeRoundAnalysis (data) {
   if (!data) throw new Error('data must be set in _storeRoundAnalysis')
-  if (data._id) {
-    log.debug('updating existing roundAnalysis', { data: data })
-    return RoundAnalysis.findOneAndUpdate({ _id: data._id }, { $set: data }, { new: true })
-  } else {
+  else {
     log.debug('Storing organization', { data: data })
     const doc = new RoundAnalysis(data)
     return doc.save()
   }
 }
 
+function _updateRoundAnalysis (data) {
+  if (data) {
+    log.debug('updating existing roundAnalysis', { data: data })
+    // let usedRounds = data._id.split('_')
+    // if (usedRounds.length > 1)
+    // pushUsedRounds()
+    return RoundAnalysis.findOneAndUpdate({ _id: data._id }, { $set: data }, { new: true })
+  } else {
+    log.debug('No data', { data: data })
+  }
+}
+
 function _fetchAllRoundAnalysisByCourseCode (courseCode) {
   log.debug('Fetching all roundAnalysis for ' + courseCode)
-  return User.find(courseCode).populate('courseRoundAnalysis').lean()
+  _fetchUsedRounds(courseCode, '20191')
+  return RoundAnalysis.find({ courseCode: courseCode }).populate('courseRoundAnalysis').lean()
+}
+
+function _fetchUsedRounds (courseCode, semester = '20191') {
+  const dbResponse = RoundAnalysis.find({ courseCode: courseCode }).populate('courseRoundAnalysis').lean()
+
+  // console.log('_fetchUsedRounds.....', dbResponse)
+}
+
+function pushUsedRounds (courseCode, semester, list) {
+  let hasCourse = CourseUsedRoundsHandler.find({ courseCode: courseCode })
+  if (!hasCourse) {
+    let doc = new CourseUsedRoundsHandler({
+      courseCode: courseCode,
+      semesterList: { $push: { semester: semester, roundList: list } }
+    })
+    console.log(doc)
+  }
 }
