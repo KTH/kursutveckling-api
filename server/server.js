@@ -134,7 +134,7 @@ apiRoute.register(paths.api.postCourseRoundAnalysisDataById, RoundAnalysis.postA
 apiRoute.register(paths.api.putCourseRoundAnalysisDataById, RoundAnalysis.putAnalysis)
 
 apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalysisList)
-// apiRoute.register(paths.api.getCouresUsedRoundsByCourseCode, RoundAnalysis.getUsedRounds)
+apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)
 server.use('/', apiRoute.getRouter())
 
 // Catch not found and errors

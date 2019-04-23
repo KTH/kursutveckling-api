@@ -83,9 +83,16 @@ function * putRoundAnalysis (req, res, next) {
 
 function * getAnalysisListByCourseCode (req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
+  const semester = req.params.semester || ''
+  let dbResponse
+  console.log('!!!!semester!!!!', semester)
   try {
-    const dbResponse = yield db.fetchAllRoundAnalysisByCourseCode(courseCode)
-    // console.log(dbResponse)
+    if (semester.length === 5) {
+      dbResponse = yield db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester)
+    } else {
+      dbResponse = yield db.fetchAllRoundAnalysisByCourseCode(courseCode)
+    }
+
     log.info('Successfully got all analysis for', { courseCode: courseCode })
     res.json(dbResponse)
   } catch (err) {
@@ -98,10 +105,36 @@ function * getUsedRounds (req, res, next) {
   const courseCode = req.params.courseCode
   const semester = req.params.semester
   try {
-    const dbResponse = db.fetchUsedRounds(courseCode, semester)
-    log.info('Successfully got used round ids for', { courseCode: courseCode, semester: semester })
-    res.json(dbResponse)
-  } catch (error) {
+    const dbResponse = yield db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
+    let returnObject = {
+      usedRounds: [],
+      publishedAnalysis: [],
+      draftAnalysis: []
+    }
 
+    let roundIdList = []
+    let tempObject = {}
+    for (let index = 0; index < dbResponse.length; index++) {
+      tempObject = {
+        user: dbResponse[index].changedBy,
+        isPublished: dbResponse[index].isPublished,
+        analysisId: dbResponse[index]._id,
+        analysisName: dbResponse[index].analysisName
+      }
+      if (tempObject.isPublished) {
+        returnObject.publishedAnalysis.push(tempObject)
+      } else {
+        returnObject.draftAnalysis.push(tempObject)
+      }
+
+      roundIdList = dbResponse[index].roundIdList && dbResponse[index].roundIdList.length > 0 ? dbResponse[index].roundIdList.split(',') : [dbResponse[index].roundIdList]
+      for (let index2 = 0; index2 < roundIdList.length; index2++) {
+        returnObject.usedRounds.push(roundIdList[index2])
+      }
+    }
+    log.info('Successfully got used round ids for', { courseCode: courseCode, semester: semester, result: returnObject })
+    res.json(returnObject)
+  } catch (error) {
+    next(error)
   }
 }

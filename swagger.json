@@ -146,7 +146,63 @@
         }
       }
     },
-    "/v1/courseAnalysisList/{courseCode}": {
+    "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}":{
+      "get":{
+        "operationId": "getUsedRounds",
+        "summary": "Gets a list of used round ids for a semester in a course",
+        "parameters":[
+          {
+            "name": "courseCode",
+            "in": "path",
+            "description": "Course code, six characters",
+            "required": true,
+            "type":"string"
+          },
+          {
+            "name": "semester",
+            "description": "Semester for rounds",
+            "in":"path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Round ids",
+            "schema": {
+              "$ref": "#/definitions/usedRoundsForCourseAndSemester"
+            }
+          },
+          "400": {
+            "description": "Bad Request, something with the request is invalid",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "No organization or user matched the Ids",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": {
+          "api_key": [
+            "read"
+          ]
+      }
+    }
+  },
+ "/v1/courseAnalysisList/{courseCode}/{semester}": {
       "get": {
         "operationId": "getAnalysisListByCourseCode",
         "summary": "Get a list of analysis for a course",
@@ -157,6 +213,13 @@
             "in": "path",
             "description": "Id of the course code",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "semester",
+            "in": "path",
+            "description": "Semester code, five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for that semester",
+            "required": false,
             "type": "string"
           }
         ],
@@ -356,6 +419,16 @@
                 "type": "string",
                 "description": "Description of the data"
               }
+        }
+      },
+    "usedRoundsForCourseAndSemester":{
+        "roundIdList": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "changedBy": {
+          "type": "string",
+          "description": "Description of the data"
         }
       },
     "Error": {

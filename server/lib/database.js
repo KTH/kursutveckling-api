@@ -11,8 +11,8 @@ module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
   storeRoundAnalysis: _storeRoundAnalysis,
   updateRoundAnalysis: _updateRoundAnalysis,
-  fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode
-  // fetchUsedRounds: _fetchUsedRounds
+  fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
+  fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -33,9 +33,6 @@ function _storeRoundAnalysis (data) {
 function _updateRoundAnalysis (data) {
   if (data) {
     log.debug('updating existing roundAnalysis', { data: data })
-    // let usedRounds = data._id.split('_')
-    // if (usedRounds.length > 1)
-    // pushUsedRounds()
     return RoundAnalysis.findOneAndUpdate({ _id: data._id }, { $set: data }, { new: true })
   } else {
     log.debug('No data', { data: data })
@@ -43,24 +40,12 @@ function _updateRoundAnalysis (data) {
 }
 
 function _fetchAllRoundAnalysisByCourseCode (courseCode) {
+  if (!courseCode) throw new Error('courseCode must be set')
   log.debug('Fetching all roundAnalysis for ' + courseCode)
-  _fetchUsedRounds(courseCode, '20191')
   return RoundAnalysis.find({ courseCode: courseCode }).populate('courseRoundAnalysis').lean()
 }
 
-function _fetchUsedRounds (courseCode, semester = '20191') {
-  const dbResponse = RoundAnalysis.find({ courseCode: courseCode }).populate('courseRoundAnalysis').lean()
-
-  // console.log('_fetchUsedRounds.....', dbResponse)
-}
-
-function pushUsedRounds (courseCode, semester, list) {
-  let hasCourse = CourseUsedRoundsHandler.find({ courseCode: courseCode })
-  if (!hasCourse) {
-    let doc = new CourseUsedRoundsHandler({
-      courseCode: courseCode,
-      semesterList: { $push: { semester: semester, roundList: list } }
-    })
-    console.log(doc)
-  }
+function _fetchAllRoundAnalysisByCourseCodeAndSemester (courseCode, semester) {
+  log.debug('Fetching all roundAnalysis for ' + courseCode + ' filtered by semester: ' + semester)
+  return RoundAnalysis.find({ courseCode: courseCode, semester: semester }).populate('usedRoundsForCourseAndSemester').lean()
 }
