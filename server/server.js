@@ -132,6 +132,7 @@ apiRoute.register(paths.api.checkAPIkey, System.checkAPIKey)
 apiRoute.register(paths.api.getCourseRoundAnalysisDataById, RoundAnalysis.getAnalysis)
 apiRoute.register(paths.api.postCourseRoundAnalysisDataById, RoundAnalysis.postAnalysis)
 apiRoute.register(paths.api.putCourseRoundAnalysisDataById, RoundAnalysis.putAnalysis)
+apiRoute.register(paths.api.deleteCourseRoundAnalysisDataById, RoundAnalysis.deleteAnalysis)
 
 apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalysisList)
 apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)

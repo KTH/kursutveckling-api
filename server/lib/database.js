@@ -11,6 +11,7 @@ module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
   storeRoundAnalysis: _storeRoundAnalysis,
   updateRoundAnalysis: _updateRoundAnalysis,
+  removeRoundAnalysisById: _removeRoundAnalysisById,
   fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
   fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester
 }
@@ -32,11 +33,16 @@ function _storeRoundAnalysis (data) {
 
 function _updateRoundAnalysis (data) {
   if (data) {
-    log.debug('updating existing roundAnalysis', { data: data })
+    log.debug('update of roundAnalysis', { data: data })
     return RoundAnalysis.findOneAndUpdate({ _id: data._id }, { $set: data }, { new: true })
   } else {
     log.debug('No data', { data: data })
   }
+}
+
+function _removeRoundAnalysisById (id) {
+  log.debug('delete roundAnalysis', { id: id })
+  return RoundAnalysis.deleteOne({ _id: id })
 }
 
 function _fetchAllRoundAnalysisByCourseCode (courseCode) {

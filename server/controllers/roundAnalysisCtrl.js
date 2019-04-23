@@ -12,6 +12,7 @@ module.exports = {
   getAnalysis: co.wrap(getRoundAnalysis),
   postAnalysis: co.wrap(postRoundAnalysis),
   putAnalysis: co.wrap(putRoundAnalysis),
+  deleteAnalysis: co.wrap(deleteRoundAnalysis),
   getAnalysisList: co.wrap(getAnalysisListByCourseCode),
   getUsedRounds: co.wrap(getUsedRounds)
 }
@@ -77,6 +78,21 @@ function * putRoundAnalysis (req, res, next) {
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in putRoundAnalysis', { error: err })
+    next(err)
+  }
+}
+
+function * deleteRoundAnalysis (req, res, next) {
+  try {
+    const id = req.params.id
+    log.info('Delete roundAnalysis', { id: id })
+
+    const dbResponse = yield db.removeRoundAnalysisById(id)
+
+    log.info('Successfully removed roundAnalysis', { id: id })
+    res.json(dbResponse)
+  } catch (err) {
+    log.error('Error in deleteRoundAnalysis', { error: err })
     next(err)
   }
 }

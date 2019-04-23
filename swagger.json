@@ -144,6 +144,42 @@
             "write"
           ]
         }
+      },
+      "delete": {
+        "operationId": "deleteCourseRoundAnalysisDataById",
+        "summary": "Delete an analysis",
+        "description": "Delete all information for analysis with sent id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the round.semester.year.x to delete analysis data",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "The analysis was deleted",
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": {
+          "api_key": [
+            "read"
+          ]
+        }
       }
     },
     "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}":{
