@@ -153,3 +153,6 @@ or need tests, a simple `echo "ok"` will suffice.
 [swagger]: http://swagger.io/
 
 ...
+
+
+.
