@@ -38,6 +38,8 @@ LOGGING_ACCESS_LOG=/Users/hoyce/repos/github/node-api/logs
 Set your basePath property in `swagger.json`:
 
 ```
+
+.
 {
   "swagger": "2.0",
   "info": {
