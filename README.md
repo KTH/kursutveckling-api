@@ -138,7 +138,7 @@ This is because the SSL information is incorrect in localSettings.js. Set ```use
 #### Testing
 
 The template project uses a [sample setup][sample-test] for
-tests using [tape][tape]. It is not required to use this test
+tests using [tape][tape]. It is not required to use this testapt list --upgradable
 harness in your projects. Simply remove the sample code and
 any reference to it in your project's `package.json` file.
 
@@ -154,3 +154,5 @@ or need tests, a simple `echo "ok"` will suffice.
 
 ...
 
+.
+      
