@@ -41,7 +41,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   examinationRounds: {
@@ -49,7 +48,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   registeredStudents: {
@@ -57,7 +55,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   examinationGrade: {
@@ -73,7 +70,7 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
+    maxlength: [1500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   commentExam: {
@@ -101,7 +98,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   pdfAnalysisDate: {
@@ -109,7 +105,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   changedDate: {
@@ -117,7 +112,6 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   changedBy: {
@@ -125,21 +119,32 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   semester: {
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
   roundIdList: {
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment must have at most 500 characters.'],
+    default: ''
+  },
+  analysisFileName: {
+    type: String,
+    trim: true,
+    minlength: 0,
+    maxlength: [50, 'Comment must have at most 500 characters.'],
+    default: ''
+  },
+  pmFileName: {
+    type: String,
+    trim: true,
+    minlength: 0,
+    maxlength: [50, 'Comment must have at most 500 characters.'],
     default: ''
   }
 

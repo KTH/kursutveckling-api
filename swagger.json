@@ -374,6 +374,14 @@
         "roundIdList": {
           "type": "string",
           "description": "Description of the data"
+        },
+        "analysisFileName": {
+          "type": "string",
+          "description": "Uploaded analysis file"
+        },
+        "pmFileName": {
+          "type": "string",
+          "description": "Uploaded pm file"
         }
       }
     }, 
@@ -454,6 +462,14 @@
               "roundIdList": {
                 "type": "string",
                 "description": "Description of the data"
+              },
+               "analysisFileName": {
+                "type": "string",
+                "description": "Uploaded analysis file"
+              },
+              "pmFileName": {
+                "type": "string",
+                "description": "Uploaded pm file"
               }
         }
       },
