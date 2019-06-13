@@ -44,11 +44,9 @@ const schema = mongoose.Schema({
     default: ''
   },
   examinationRounds: {
-    type: String,
-    // required: [true, 'Name is required.'],
-    trim: true,
+    type: Array,
     minlength: 0,
-    default: ''
+    default: []
   },
   registeredStudents: {
     type: String,
@@ -107,6 +105,13 @@ const schema = mongoose.Schema({
     minlength: 0,
     default: ''
   },
+  pdfPMDate: {
+    type: String, // TODO: DATE
+    // required: [true, 'Name is required.'],
+    trim: true,
+    minlength: 0,
+    default: ''
+  },
   changedDate: {
     type: String, // TODO: DATE
     // required: [true, 'Name is required.'],
@@ -146,8 +151,11 @@ const schema = mongoose.Schema({
     minlength: 0,
     maxlength: [50, 'Comment must have at most 500 characters.'],
     default: ''
+  },
+  ugKeys: {
+    type: Array,
+    default: []
   }
-
 })
 
 const RoundAnalysis = mongoose.model('RoundAnalysis', schema)

@@ -323,7 +323,7 @@
           "description": "Description of the data"
         },
         "examinationRounds": {
-          "type": "string",
+          "type": "array",
           "description": "Description of the data"
         },
         "registeredStudents": {
@@ -356,6 +356,10 @@
           
         },
         "pdfAnalysisDate": {
+          "type": "string",
+          "description": "Description of the data"
+        },
+        "pdfPMDate": {
           "type": "string",
           "description": "Description of the data"
         },
@@ -420,7 +424,7 @@
                 "description": "Description of the data"
               },
               "examinationGrade": {
-                "type": "string",
+                "type": "array",
                 "description": "Description of the data"
               },
               "alterationText": {
@@ -448,6 +452,10 @@
                 "type": "string",
                 "description": "Description of the data"
               },
+              "pdfPMDate": {
+                "type": "string",
+                "description": "Description of the data"
+              },
               "changedDate": {
                 "type": "string",
                 "description": "Description of the data"
@@ -469,6 +477,10 @@
               },
               "pmFileName": {
                 "type": "string",
+                "description": "Uploaded pm file"
+              },
+              "ugKeys": {
+                "type": "array",
                 "description": "Uploaded pm file"
               }
         }
