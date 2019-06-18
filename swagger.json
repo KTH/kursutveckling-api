@@ -387,6 +387,14 @@
           "type": "string",
           "description": "Uploaded pm file"
         }
+      },
+      "ugKeys": {
+        "type": "array",
+        "description": "Uploaded pm file"
+      },
+      "syllabusStartTerm": {
+        "type": "array",
+        "description": "Uploaded pm file"
       }
     }, 
     "roundAnalysis": {
@@ -480,6 +488,10 @@
                 "description": "Uploaded pm file"
               },
               "ugKeys": {
+                "type": "array",
+                "description": "Uploaded pm file"
+              },
+              "syllabusStartTerm": {
                 "type": "array",
                 "description": "Uploaded pm file"
               }

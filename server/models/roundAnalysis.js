@@ -155,6 +155,10 @@ const schema = mongoose.Schema({
   ugKeys: {
     type: Array,
     default: []
+  },
+  syllabusStartTerm: {
+    type: String,
+    default: ''
   }
 })
 

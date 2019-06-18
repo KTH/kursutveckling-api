@@ -135,7 +135,8 @@ function * getUsedRounds (req, res, next) {
         user: dbResponse[index].changedBy,
         isPublished: dbResponse[index].isPublished,
         analysisId: dbResponse[index]._id,
-        analysisName: dbResponse[index].analysisName
+        analysisName: dbResponse[index].analysisName,
+        ugKeys: dbResponse[index].ugKeys
       }
       if (tempObject.isPublished) {
         returnObject.publishedAnalysis.push(tempObject)
