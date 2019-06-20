@@ -159,6 +159,10 @@ const schema = mongoose.Schema({
   syllabusStartTerm: {
     type: String,
     default: ''
+  },
+  changedAfterPublishedDate: {
+    type: String,
+    default: ''
   }
 })
 
