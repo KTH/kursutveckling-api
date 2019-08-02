@@ -61,7 +61,7 @@
           "200": {
             "description": "The requested data",
             "schema": {
-              "$ref": "#/definitions/Data"
+              "$ref": "#/definitions/roundAnalysis"
             }
           },
           "default": {
@@ -165,7 +165,7 @@
           "200": {
             "description": "The analysis was deleted",
             "schema": {
-              "$ref": "#/definitions/Data"
+              "$ref": "#/definitions/roundAnalysis"
             }
           },
           "default": {
@@ -266,7 +266,7 @@
           "200": {
             "description": "The requested data",
             "schema": {
-              "$ref": "#/definitions/Data"
+              "$ref": "#/definitions/roundAnalysis"
             }
           },
           "default": {
@@ -296,216 +296,113 @@
     }
   },
   "definitions": {
-    "Data": {
-      "properties": {
-        "_id": {
-          "type": "string",
-          "description": "Unique identifier representing some specific data"
-        },
-        "analysisName": {
-          "type": "string",
-          "description": "Unique identifier representing some specific data"
-        },
-        "courseCode": {
-          "type": "string",
-          "description": "Unique identifier representing some specific data"
-        },
-        "programmeCodes": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "examiners": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "responsibles": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "examinationRounds": {
-          "type": "array",
-          "description": "Description of the data"
-        },
-        "registeredStudents": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "examinationGrade": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "alterationText": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "commentExam": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "commentChange": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "isPublished": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "publishedDate": {
-          "type": "string",
-          "description": "Description of the data"
-          
-        },
-        "pdfAnalysisDate": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "pdfPMDate": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "changedDate": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "changedBy": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "semester": {
-          "type": "string",
-          "description": "Description of the data"
-        },
-        "roundIdList": {
-          "type": "string",
-          "description": "List of round id:s used in analysis"
-        },
-        "analysisFileName": {
-          "type": "string",
-          "description": "Uploaded analysis file"
-        },
-        "pmFileName": {
-          "type": "string",
-          "description": "Uploaded pm file"
-        }
-      },
-      "ugKeys": {
-        "type": "array",
-        "description": "UG Keys for access to edit analysis"
-      },
-      "syllabusStartTerm": {
-        "type": "array",
-        "description": "Connected syllabus"
-      },
-      "changedAfterPublishedDate": {
-        "type": "array",
-        "description": "Date for changes made after published"
-      }
-    }, 
     "roundAnalysis": {
-        "type": "object",
-        "required": [
-          "courseCode"
-          ],
-          "properties": {
-              "analysisName": {
-                "type": "string",
-                "description": "Unique identifier representing some specific data"
-              },
-              "courseCode": {
-                "type": "string",
-                "description": "Unique identifier representing some specific data"
-              },
-              "programmeCodes": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "examiners": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "responsibles": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "examinationRounds": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "registeredStudents": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "examinationGrade": {
-                "type": "array",
-                "description": "Description of the data"
-              },
-              "alterationText": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "commentExam": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "commentChange": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "isPublished": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "publishedDate": {
-                "type": "string",
-                "description": "Description of the data"
-                
-              },
-              "pdfAnalysisDate": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "pdfPMDate": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "changedDate": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "changedBy": {
-                "type": "string",
-                "description": "Description of the data"
-              }, 
-              "semester": {
-                "type": "string",
-                "description": "Description of the data"
-              },
-              "roundIdList": {
-                "type": "string",
-                "description": "List of round id:s used in analysis"
-              },
-              "analysisFileName": {
-                "type": "string",
-                "description": "Uploaded analysis file"
-              },
-              "pmFileName": {
-                "type": "string",
-                "description": "Uploaded pm file"
-              },      
-            "ugKeys": {
-              "type": "array",
-              "description": "UG Keys for access to edit analysis"
+      "type": "object",
+      "required": [
+        "courseCode"
+        ],
+        "properties": {
+            "analysisName": {
+              "type": "string",
+              "description": "Unique identifier representing some specific data"
             },
-            "syllabusStartTerm": {
-              "type": "array",
-              "description": "Connected syllabus"
+            "courseCode": {
+              "type": "string",
+              "description": "Unique identifier representing some specific data"
             },
-            "changedAfterPublishedDate": {
+            "programmeCodes": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "examiners": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "responsibles": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "examinationRounds": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "registeredStudents": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "examinationGrade": {
               "type": "array",
-              "description": "Date for changes made after published"
-            }
-        }
-      },
+              "items":"string",
+              "description": "Description of the data"
+            },
+            "alterationText": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "commentExam": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "commentChange": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "isPublished": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "publishedDate": {
+              "type": "string",
+              "description": "Description of the data"
+              
+            },
+            "pdfAnalysisDate": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "pdfPMDate": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "changedDate": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "changedBy": {
+              "type": "string",
+              "description": "Description of the data"
+            }, 
+            "semester": {
+              "type": "string",
+              "description": "Description of the data"
+            },
+            "roundIdList": {
+              "type": "string",
+              "description": "List of round id:s used in analysis"
+            },
+            "analysisFileName": {
+              "type": "string",
+              "description": "Uploaded analysis file"
+            },
+            "pmFileName": {
+              "type": "string",
+              "description": "Uploaded pm file"
+            },      
+          "ugKeys": {
+            "type": "array",
+            "items":"string",
+            "description": "UG Keys for access to edit analysis"
+          },
+          "syllabusStartTerm": {
+            "type": "string",
+            "description": "Connected syllabus"
+          },
+          "changedAfterPublishedDate": {
+            "type": "string",
+            "description": "Date for changes made after published"
+          }
+      }
+    },
       "usedRoundsForCourseAndSemester":{
         "roundIdList": {
           "type": "string",
@@ -517,6 +414,20 @@
         }
       },
     "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    },
+    "UserList": {
       "properties": {
         "code": {
           "type": "integer",
