@@ -54,8 +54,6 @@ server.set('view engine', 'handlebars')
  */
 const accessLog = require('kth-node-access-log')
 server.use(accessLog(config.logging.accessLog))
-const morgan = require('morgan')
-server.use(morgan(':method :url :status :res[content-length] --kip_kursutveckling_api-- :response-time ms'))
 
 // QUESTION: Should this really be set here?
 // http://expressjs.com/en/api.html#app.set
