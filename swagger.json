@@ -43,8 +43,8 @@
     "/v1/courseRoundAnalysis/{id}": {
       "get": {
         "operationId": "getCourseRoundAnalysisDataById",
-        "summary": "Get all analysis for rounds in a course",
-        "description": "Gets analysis for rounds in a course that only requires read access",
+        "summary": "Get a list of all analysis connected to a course code",
+        "description": "Get a list of all analysis connected to a course code",
         "parameters": [
           {
             "name": "id",
@@ -59,7 +59,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested data",
+            "description": "List of analyses for course code and all the data",
             "schema": {
               "$ref": "#/definitions/roundAnalysis"
             }
@@ -79,13 +79,13 @@
       },
       "post": {
         "operationId": "postCourseRoundAnalysisDataById",
-        "summary": "Saves an object in the database",
-        "description": "Saves changes to an object in the database",
+        "summary": "Saves an analysis object in the database",
+        "description": "Saves an analysis object in the database",
         "parameters": [
           {
             "name": "roundAnalysisData",
             "in": "body",
-            "description": "Analysis data for a specific round ",
+            "description": "Analysis data  ",
             "schema": {
               "$ref": "#/definitions/roundAnalysis"
             }
@@ -113,13 +113,13 @@
       },
       "put": {
         "operationId": "putCourseRoundAnalysisDataById",
-        "summary": "Saves an object in the database",
-        "description": "Saves changes to an object in the database",
+        "summary": "Updates an analysis",
+        "description": "Saves changes to an analysis in the database",
         "parameters": [
           {
             "name": "roundAnalysisData",
             "in": "body",
-            "description": "Analysis data for a specific round ",
+            "description": "Analysis data for a course round(s) round ",
             "schema": {
               "$ref": "#/definitions/roundAnalysis"
             }
@@ -190,7 +190,7 @@
           {
             "name": "courseCode",
             "in": "path",
-            "description": "Course code, six characters",
+            "description": "Course code, six or seven characters",
             "required": true,
             "type":"string"
           },
@@ -219,7 +219,7 @@
             }
           },
           "404": {
-            "description": "No organization or user matched the Ids",
+            "description": "No course and semester matched the request",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -241,8 +241,8 @@
  "/v1/courseAnalysisList/{courseCode}/{semester}": {
       "get": {
         "operationId": "getAnalysisListByCourseCode",
-        "summary": "Get a list of analysis for a course",
-        "description": "Gets analysis for rounds in a course that only requires read access",
+        "summary": "Get a list of analyses for a course",
+        "description": "Gets analyses for rounds in a course",
         "parameters": [
           {
             "name": "courseCode",
@@ -264,7 +264,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested data",
+            "description": "Successfully got analyses for requested course code and semester",
             "schema": {
               "$ref": "#/definitions/roundAnalysis"
             }
@@ -304,94 +304,94 @@
         "properties": {
             "analysisName": {
               "type": "string",
-              "description": "Unique identifier representing some specific data"
+              "description": "Analysis name"
             },
             "courseCode": {
               "type": "string",
-              "description": "Unique identifier representing some specific data"
+              "description": "Coure code for the course that are connected to the analysis"
             },
             "programmeCodes": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Programmes that are mandatory"
             },
             "examiners": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Examiner(s) for the course that semester"
             },
             "responsibles": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Responsible(s) for the course that semester"
             },
             "examinationRounds": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Examinations rounds for the course and semester"
             },
             "registeredStudents": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Number of registere student for round(s) that semester"
             },
             "examinationGrade": {
               "type": "array",
               "items":"string",
-              "description": "Description of the data"
+              "description": "Precentage of students completed the round(s)"
             },
             "alterationText": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Text that descibes changes that have been made in the course"
             },
             "commentExam": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Comment to Examination round(s)"
             },
             "commentChange": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Mandatory text if changes are made after analysis been published"
             },
             "isPublished": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Sets to true when analysis is published"
             },
             "publishedDate": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Date when analysis is first published"
               
             },
             "pdfAnalysisDate": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Date when analysis file was uploaded"
             },
             "pdfPMDate": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Date when pm/memo file was uploaded"
             },
             "changedDate": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Date when an analysis was updated"
             },
             "changedBy": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Username of creator of the analysis"
             }, 
             "semester": {
               "type": "string",
-              "description": "Description of the data"
+              "description": "Course semester for analysis"
             },
             "roundIdList": {
               "type": "string",
-              "description": "List of round id:s used in analysis"
+              "description": "Round id(s) used in analysis"
             },
             "analysisFileName": {
               "type": "string",
-              "description": "Uploaded analysis file"
+              "description": "Name of uploaded analysis file"
             },
             "pmFileName": {
               "type": "string",
-              "description": "Uploaded pm file"
+              "description": "Name of uploaded pm/memo file"
             },      
           "ugKeys": {
             "type": "array",
             "items":"string",
-            "description": "UG Keys for access to edit analysis"
+            "description": "UG Keys for user access to edit analysis"
           },
           "syllabusStartTerm": {
             "type": "string",
@@ -406,11 +406,11 @@
       "usedRoundsForCourseAndSemester":{
         "roundIdList": {
           "type": "string",
-          "description": "Description of the data"
+          "description": "List of rounds that have been used for a course semester"
         },
         "changedBy": {
           "type": "string",
-          "description": "Description of the data"
+          "description": "User that"
         }
       },
     "Error": {
