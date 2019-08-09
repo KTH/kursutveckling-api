@@ -400,6 +400,14 @@
           "changedAfterPublishedDate": {
             "type": "string",
             "description": "Date for changes made after published"
+          },
+          "examinationGradeFromLadok": {
+            "type": "boolean",
+            "description": "A check if values been collected from Ladok or filled in by user"
+          },
+          "registeredStudentsFromLadok": {
+            "type": "boolean",
+            "description": "A check if values been collected from Ladok or filled in by user"
           }
       }
     },

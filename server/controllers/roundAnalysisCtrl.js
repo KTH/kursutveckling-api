@@ -47,11 +47,7 @@ function * postRoundAnalysis (req, res, next) {
     }
     req.body.changedDate = new Date()
     const dbResponse = yield db.storeRoundAnalysis(req.body)
-
-    // const paths = getPaths()
-    res.status(201)/* .set({
-      'Location': paths.api.getdocanization.uri.replace(':id', doc._id)
-    }) */.json(dbResponse)
+    res.status(201).json(dbResponse)
   } catch (err) {
     log.error('Error in postdocanization', { error: err })
     next(err)
@@ -72,7 +68,6 @@ function * putRoundAnalysis (req, res, next) {
 
     req.body.changedDate = new Date()
     let dbResponse = yield db.updateRoundAnalysis(req.body)
-    // console.log('dbResponse', dbResponse)
 
     log.info('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)

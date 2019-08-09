@@ -162,6 +162,14 @@ const schema = mongoose.Schema({
   changedAfterPublishedDate: {
     type: String,
     default: ''
+  },
+  examinationGradeFromLadok: {
+    type: Boolean,
+    default: false
+  },
+  registeredStudentsFromLadok: {
+    type: Boolean,
+    default: false
   }
 })
 
