@@ -13,7 +13,7 @@ const { safeGet } = require('safe-utils')
 // DEFAULT SETTINGS used for dev, if you want to override these for you local environment, use env-vars in .env
 const devPrefixPath = devDefaults('/api/kursutveckling')
 const devSsl = devDefaults(false)
-const devPort = devDefaults(3001)
+const devPort = devDefaults(3002)
 const devMongodb = devDefaults('mongodb://localhost:27017/kursutveckling')
 
 // EXAMPLE: const devApiKeys = devDefaults('?name=devClient&apiKey=SET_YOUR_API_KEY&scope=write&scope=read')

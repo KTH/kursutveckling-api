@@ -408,6 +408,14 @@
           "registeredStudentsFromLadok": {
             "type": "boolean",
             "description": "A check if values been collected from Ladok or filled in by user"
+          },
+          "registeredStudentsLadok": {
+            "type": "int34",
+            "description": "Number that was collected from Ladok "
+          },
+          "examinationGradeLadok": {
+            "type": "int34",
+            "description": "Number that was collected from Ladok "
           }
       }
     },

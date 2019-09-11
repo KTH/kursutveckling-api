@@ -170,6 +170,14 @@ const schema = mongoose.Schema({
   registeredStudentsFromLadok: {
     type: Boolean,
     default: false
+  },
+  registeredStudentsLadok: {
+    type: Number,
+    default: -1
+  },
+  examinationGradeLadok: {
+    type: Number,
+    default: -1
   }
 })
 
