@@ -289,122 +289,121 @@
       "required": [
         "courseCode"
         ],
-        "properties": {
-            "analysisName": {
-              "type": "string",
-              "description": "Analysis name"
-            },
-            "courseCode": {
-              "type": "string",
-              "description": "Coure code for the course that are connected to the analysis"
-            },
-            "programmeCodes": {
-              "type": "string",
-              "description": "Programmes that are mandatory"
-            },
-            "examiners": {
-              "type": "string",
-              "description": "Examiner(s) for the course that semester"
-            },
-            "responsibles": {
-              "type": "string",
-              "description": "Responsible(s) for the course that semester"
-            },
-            "examinationRounds": {
-              "type": "string",
-              "description": "Examinations rounds for the course and semester"
-            },
-            "registeredStudents": {
-              "type": "string",
-              "description": "Number of registere student for round(s) that semester"
-            },
-            "examinationGrade": {
-              "type": "array",
-              "items":"string",
-              "description": "Precentage of students completed the round(s)"
-            },
-            "alterationText": {
-              "type": "string",
-              "description": "Text that descibes changes that have been made in the course"
-            },
-            "commentExam": {
-              "type": "string",
-              "description": "Comment to Examination round(s)"
-            },
-            "commentChange": {
-              "type": "string",
-              "description": "Mandatory text if changes are made after analysis been published"
-            },
-            "isPublished": {
-              "type": "string",
-              "description": "Sets to true when analysis is published"
-            },
-            "publishedDate": {
-              "type": "string",
-              "description": "Date when analysis is first published"
-              
-            },
-            "pdfAnalysisDate": {
-              "type": "string",
-              "description": "Date when analysis file was uploaded"
-            },
-            "pdfPMDate": {
-              "type": "string",
-              "description": "Date when pm/memo file was uploaded"
-            },
-            "changedDate": {
-              "type": "string",
-              "description": "Date when an analysis was updated"
-            },
-            "changedBy": {
-              "type": "string",
-              "description": "Username of creator of the analysis"
-            }, 
-            "semester": {
-              "type": "string",
-              "description": "Course semester for analysis"
-            },
-            "roundIdList": {
-              "type": "string",
-              "description": "Round id(s) used in analysis"
-            },
-            "analysisFileName": {
-              "type": "string",
-              "description": "Name of uploaded analysis file"
-            },
-            "pmFileName": {
-              "type": "string",
-              "description": "Name of uploaded pm/memo file"
-            },      
-            "ugKeys": {
-              "type": "array",
-              "items":"string",
-              "description": "UG Keys for user access to edit analysis"
-            },
-            "syllabusStartTerm": {
-              "type": "string",
-              "description": "Connected syllabus"
-            },
-            "changedAfterPublishedDate": {
-              "type": "string",
-              "description": "Date for changes made after published"
-            },
-            "examinationGradeFromLadok": {
-              "type": "boolean",
-              "description": "A check if values been collected from Ladok or filled in by user"
-            },
-            "registeredStudentsFromLadok": {
-              "type": "boolean",
-              "description": "A check if values been collected from Ladok or filled in by user"
-            },
-            "registeredStudentsLadok": {
-              "type": "int34",
-              "description": "Number that was collected from Ladok "
-            },
-            "examinationGradeLadok": {
-              "type": "int34",
-              "description": "Number that was collected from Ladok "
-            }
+      "properties": {
+        "analysisName": {
+          "type": "string",
+          "description": "Analysis name"
+        },
+        "courseCode": {
+          "type": "string",
+          "description": "Coure code for the course that are connected to the analysis"
+        },
+        "programmeCodes": {
+          "type": "string",
+          "description": "Programmes that are mandatory"
+        },
+        "examiners": {
+          "type": "string",
+          "description": "Examiner(s) for the course that semester"
+        },
+        "responsibles": {
+          "type": "string",
+          "description": "Responsible(s) for the course that semester"
+        },
+        "examinationRounds": {
+          "type": "string",
+          "description": "Examinations rounds for the course and semester"
+        },
+        "registeredStudents": {
+          "type": "string",
+          "description": "Number of registere student for round(s) that semester"
+        },
+        "examinationGrade": {
+          "type": "array",
+          "items":"string",
+          "description": "Precentage of students completed the round(s)"
+        },
+        "alterationText": {
+          "type": "string",
+          "description": "Text that descibes changes that have been made in the course"
+        },
+        "commentExam": {
+          "type": "string",
+          "description": "Comment to Examination round(s)"
+        },
+        "commentChange": {
+          "type": "string",
+          "description": "Mandatory text if changes are made after analysis been published"
+         },
+        "isPublished": {
+          "type": "string",
+          "description": "Sets to true when analysis is published"
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Date when analysis is first published" 
+        },
+        "pdfAnalysisDate": {
+          "type": "string",
+          "description": "Date when analysis file was uploaded"
+        },
+        "pdfPMDate": {
+          "type": "string",
+          "description": "Date when pm/memo file was uploaded"
+        },
+        "changedDate": {
+          "type": "string",
+          "description": "Date when an analysis was updated"
+        },
+        "changedBy": {
+          "type": "string",
+          "description": "Username of creator of the analysis"
+        }, 
+        "semester": {
+          "type": "string",
+          "description": "Course semester for analysis"
+        },
+        "roundIdList": {
+          "type": "string",
+          "description": "Round id(s) used in analysis"
+        },
+        "analysisFileName": {
+          "type": "string",
+          "description": "Name of uploaded analysis file"
+        },
+        "pmFileName": {
+          "type": "string",
+          "description": "Name of uploaded pm/memo file"
+        },      
+        "ugKeys": {
+          "type": "array",
+          "items":"string",
+          "description": "UG Keys for user access to edit analysis"
+        },
+        "syllabusStartTerm": {
+          "type": "string",
+          "description": "Connected syllabus"
+        },
+        "changedAfterPublishedDate": {
+          "type": "string",
+          "description": "Date for changes made after published"
+        },
+        "examinationGradeFromLadok": {
+          "type": "boolean",
+          "description": "A check if values been collected from Ladok or filled in by user"
+        },
+        "registeredStudentsFromLadok": {
+          "type": "boolean",
+          "description": "A check if values been collected from Ladok or filled in by user"
+        },
+        "registeredStudentsLadok": {
+          "type": "integer",
+          "description": "The result of registered students that was collected from Ladok "
+        },
+        "examinationGradeLadok": {
+          "type": "integer",
+          "description": "The result of examination grade that was collected from Ladok "
+        }
       }
     },
       "usedRoundsForCourseAndSemester":{
