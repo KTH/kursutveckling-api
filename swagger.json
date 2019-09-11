@@ -212,18 +212,6 @@
               "$ref": "#/definitions/usedRoundsForCourseAndSemester"
             }
           },
-          "400": {
-            "description": "Bad Request, something with the request is invalid",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "No course and semester matched the request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
           "default": {
             "description": "Unexpected error",
             "schema": {
@@ -388,47 +376,84 @@
               "type": "string",
               "description": "Name of uploaded pm/memo file"
             },      
-          "ugKeys": {
-            "type": "array",
-            "items":"string",
-            "description": "UG Keys for user access to edit analysis"
-          },
-          "syllabusStartTerm": {
-            "type": "string",
-            "description": "Connected syllabus"
-          },
-          "changedAfterPublishedDate": {
-            "type": "string",
-            "description": "Date for changes made after published"
-          },
-          "examinationGradeFromLadok": {
-            "type": "boolean",
-            "description": "A check if values been collected from Ladok or filled in by user"
-          },
-          "registeredStudentsFromLadok": {
-            "type": "boolean",
-            "description": "A check if values been collected from Ladok or filled in by user"
-          },
-          "registeredStudentsLadok": {
-            "type": "int34",
-            "description": "Number that was collected from Ladok "
-          },
-          "examinationGradeLadok": {
-            "type": "int34",
-            "description": "Number that was collected from Ladok "
-          }
+            "ugKeys": {
+              "type": "array",
+              "items":"string",
+              "description": "UG Keys for user access to edit analysis"
+            },
+            "syllabusStartTerm": {
+              "type": "string",
+              "description": "Connected syllabus"
+            },
+            "changedAfterPublishedDate": {
+              "type": "string",
+              "description": "Date for changes made after published"
+            },
+            "examinationGradeFromLadok": {
+              "type": "boolean",
+              "description": "A check if values been collected from Ladok or filled in by user"
+            },
+            "registeredStudentsFromLadok": {
+              "type": "boolean",
+              "description": "A check if values been collected from Ladok or filled in by user"
+            },
+            "registeredStudentsLadok": {
+              "type": "int34",
+              "description": "Number that was collected from Ladok "
+            },
+            "examinationGradeLadok": {
+              "type": "int34",
+              "description": "Number that was collected from Ladok "
+            }
       }
     },
       "usedRoundsForCourseAndSemester":{
-        "roundIdList": {
-          "type": "string",
-          "description": "List of rounds that have been used for a course semester"
-        },
-        "changedBy": {
-          "type": "string",
-          "description": "User that"
+        "properties": {
+          "usedRounds": {
+            "type": "array",
+            "items": "string",
+            "description": "List of round ids that have been used for a course semester"
+          },
+          "publishedAnalysis": {
+            "type": "array",
+            "items":{
+            "schema": {
+              "$ref": "#/definitions/UsedAnalysis"
+            }
+            },
+            "description": "List of published analysis, name, id, UGkeys"
+          },
+          "draftAnalysis": {
+            "type": "array",
+            "items":{
+            "schema": {
+              "$ref": "#/definitions/UsedAnalysis"
+            }
+            },
+            "description": "List of draft analysis, name, id, UGkeys"
+          }
         }
       },
+    "UsedAnalysis":{
+      "properties":{
+        "user": {
+          "type": "string"
+        },
+        "isPublished": {
+          "type":"boolean"
+        },
+        "analysisId": {
+          "type":"string"
+        },
+        "analysisName": {
+          "type":"string"
+        },
+        "ugKeys": {
+          "type":"array",
+          "items":"string"
+        }
+      }
+    },
     "Error": {
       "properties": {
         "code": {
