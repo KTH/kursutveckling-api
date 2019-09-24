@@ -14,7 +14,7 @@ if (nodeEnv === 'development' || nodeEnv === 'dev' || !nodeEnv) {
 // Now read the server config etc.
 const config = require('./configuration').server
 const AppRouter = require('kth-node-express-routing').PageRouter
-const getPaths = require('kth-node-express-routing').getPaths
+const { getPaths } = require('kth-node-express-routing')
 
 // Expose the server and paths
 server.locals.secret = new Map()
@@ -89,7 +89,7 @@ require('./database').connect()
  * ******* APPLICATION ROUTES *******
  * **********************************
  */
-const addPaths = require('kth-node-express-routing').addPaths
+const { addPaths } = require('kth-node-express-routing')
 const { createApiPaths, createSwaggerRedirectHandler, notFoundHandler, errorHandler } = require('kth-node-api-common')
 const swaggerData = require('../swagger.json')
 const { System } = require('./controllers')

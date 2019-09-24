@@ -1,10 +1,11 @@
 'use strict'
 
 const packageFile = require('../../package.json')
-const getPaths = require('kth-node-express-routing').getPaths
+const { getPaths } = require('kth-node-express-routing')
 const db = require('kth-node-mongo')
+const version = require('../../config/version')
+const config = require('../configuration').server
 
-const Promise = require('bluebird')
 const registry = require('component-registry').globalRegistry
 const { IHealthCheck } = require('kth-node-monitor').interfaces
 
@@ -36,9 +37,18 @@ function getSwagger (req, res) {
 function getAbout (req, res) {
   const paths = getPaths()
   res.render('system/about', {
-    appName: packageFile.name,
-    appVersion: packageFile.version,
-    appDescription: packageFile.description,
+    layout: '', // must be empty by some reason
+    appName: JSON.stringify(packageFile.name),
+    appVersion: JSON.stringify(packageFile.version),
+    appDescription: JSON.stringify(packageFile.description),
+    version: JSON.stringify(version),
+    config: JSON.stringify(config.templateConfig),
+    gitBranch: JSON.stringify(version.gitBranch),
+    gitCommit: JSON.stringify(version.gitCommit),
+    jenkinsBuild: JSON.stringify(version.jenkinsBuild),
+    jenkinsBuildDate: JSON.stringify(version.jenkinsBuildDate),
+    dockerName: JSON.stringify(version.dockerName),
+    dockerVersion: JSON.stringify(version.dockerVersion),
     monitorUri: paths.system.monitor.uri,
     robotsUri: paths.system.robots.uri
   })
