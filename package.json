@@ -2,7 +2,7 @@
   "//": "The production flag is added in the jenkins build script.",
   "name": "kursutveckling-api",
   "version": "2.0.0",
-  "description": "Node.js based API template application.",
+  "description": "Collect data for course development and history page, used by kursutveckling-web and kursutveckling-admin-web.",
   "main": "app.js",
   "private": true,
   "scripts": {
@@ -16,7 +16,6 @@
     "test"
   ],
   "dependencies": {
-    "bluebird": "^3.5.3",
     "body-parser": "^1.15.2",
     "co": "^4.6.0",
     "component-registry": "^0.2.0",
@@ -31,7 +30,7 @@
     "kth-node-express-routing": "^0.4.0",
     "kth-node-log": "^3.0.2",
     "kth-node-mongo": "^2.0.3",
-    "kth-node-monitor": "^0.1.11",
+    "kth-node-monitor": "^0.1.19",
     "kth-node-response": "KTH/kth-node-response.git#v1.0.0",
     "kth-node-server": "^3.1.1",
     "mongoose": "^4.5.8",
