@@ -323,6 +323,10 @@
           "items":"string",
           "description": "Precentage of students completed the round(s)"
         },
+        "endDate": {
+          "type": "string",
+          "description": "End date for round(s) that semester"
+        },
         "alterationText": {
           "type": "string",
           "description": "Text that descibes changes that have been made in the course"
@@ -403,6 +407,14 @@
         "examinationGradeLadok": {
           "type": "integer",
           "description": "The result of examination grade that was collected from Ladok "
+        },
+        "endDateFromLadok": {
+          "type": "boolean",
+          "description": "A check if values been collected from Ladok or filled in by user"
+        },
+        "endDateLadok": {
+          "type": "string",
+          "description": "The end date used for result of examination grade that was collected from Ladok "
         }
       }
     },

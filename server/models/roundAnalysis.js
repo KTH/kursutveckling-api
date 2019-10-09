@@ -63,6 +63,12 @@ const schema = mongoose.Schema({
     maxlength: [500, 'Comment must have at most 500 characters.'],
     default: ''
   },
+  endDate: {
+    type: String, // TODO: DATE
+    trim: true,
+    minlength: 0,
+    default: ''
+  },
   alterationText: {
     type: String,
     // required: [true, 'Name is required.'],
@@ -178,6 +184,16 @@ const schema = mongoose.Schema({
   examinationGradeLadok: {
     type: Number,
     default: -1
+  },
+  endDateFromLadok: {
+    type: Boolean,
+    default: false
+  },
+  endDateLadok: {
+    type: String, // TODO: DATE
+    trim: true,
+    minlength: 0,
+    default: ''
   }
 })
 
