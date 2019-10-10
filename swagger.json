@@ -415,6 +415,10 @@
         "endDateLadok": {
           "type": "string",
           "description": "The end date used for result of examination grade that was collected from Ladok "
+        },
+        "ladokUIDs": {
+          "type": "array",
+          "description": "The UIDs collected from Ladok"
         }
       }
     },

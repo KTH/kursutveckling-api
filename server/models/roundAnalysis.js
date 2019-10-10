@@ -194,6 +194,11 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     default: ''
+  },
+  ladokUIDs: {
+    type: Array,
+    minlength: 0,
+    default: []
   }
 })
 
