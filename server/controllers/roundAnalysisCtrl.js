@@ -17,13 +17,13 @@ module.exports = {
   getUsedRounds: co.wrap(getUsedRounds)
 }
 
-function * getRoundAnalysis (req, res, next) {
+async function getRoundAnalysis (req, res, next) {
   try {
     let doc = {}
     if (process.env.NODE_MOCK) {
-      doc = yield { _id: 0, courseCode: 'xx1122' }
+      doc = await { _id: 0, courseCode: 'xx1122' }
     } else {
-      doc = yield db.fetchRoundAnalysisById(req.params.id)
+      doc = await db.fetchRoundAnalysisById(req.params.id)
     }
     if (!doc) {
       return next()
@@ -34,19 +34,19 @@ function * getRoundAnalysis (req, res, next) {
   }
 }
 
-function * postRoundAnalysis (req, res, next) {
+async function postRoundAnalysis (req, res, next) {
   try {
     const id = req.body._id
 
     log.info('Storing roundAnalysis', { id: id })
-    const exists = yield db.fetchRoundAnalysisById(id)
+    const exists = await db.fetchRoundAnalysisById(id)
 
     if (exists) {
       log.info('roundAnalysis already exists, returning...', { id: id })
       return res.status(400).json({ message: 'An roundAnalysis with that id already exist.' })
     }
     req.body.changedDate = new Date()
-    const dbResponse = yield db.storeRoundAnalysis(req.body)
+    const dbResponse = await db.storeRoundAnalysis(req.body)
     res.status(201).json(dbResponse)
   } catch (err) {
     log.error('Error in postdocanization', { error: err })
@@ -54,12 +54,12 @@ function * postRoundAnalysis (req, res, next) {
   }
 }
 
-function * putRoundAnalysis (req, res, next) {
+async function putRoundAnalysis (req, res, next) {
   try {
     const id = req.body._id
     log.info('Updating roundAnalysis', { id: id })
 
-    const doc = yield db.fetchRoundAnalysisById(id)
+    const doc = db.fetchRoundAnalysisById(id)
 
     if (!doc) {
       log.info('No roundAnalysis found, returning...', { doc: doc })
@@ -67,7 +67,7 @@ function * putRoundAnalysis (req, res, next) {
     }
 
     req.body.changedDate = new Date()
-    let dbResponse = yield db.updateRoundAnalysis(req.body)
+    let dbResponse = db.updateRoundAnalysis(req.body)
 
     log.info('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
@@ -77,12 +77,12 @@ function * putRoundAnalysis (req, res, next) {
   }
 }
 
-function * deleteRoundAnalysis (req, res, next) {
+async function deleteRoundAnalysis (req, res, next) {
   try {
     const id = req.params.id
     log.info('Delete roundAnalysis', { id: id })
 
-    const dbResponse = yield db.removeRoundAnalysisById(id)
+    const dbResponse = await db.removeRoundAnalysisById(id)
 
     log.info('Successfully removed roundAnalysis', { id: id })
     res.json(dbResponse)
@@ -92,16 +92,16 @@ function * deleteRoundAnalysis (req, res, next) {
   }
 }
 
-function * getAnalysisListByCourseCode (req, res, next) {
+async function getAnalysisListByCourseCode (req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
   const semester = req.params.semester || ''
   let dbResponse
   console.log('!!!!semester!!!!', semester)
   try {
     if (semester.length === 5) {
-      dbResponse = yield db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester)
+      dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester)
     } else {
-      dbResponse = yield db.fetchAllRoundAnalysisByCourseCode(courseCode)
+      dbResponse = await db.fetchAllRoundAnalysisByCourseCode(courseCode)
     }
 
     log.info('Successfully got all analysis for', { courseCode: courseCode })
@@ -112,11 +112,11 @@ function * getAnalysisListByCourseCode (req, res, next) {
   }
 }
 
-function * getUsedRounds (req, res, next) {
+async function getUsedRounds (req, res, next) {
   const courseCode = req.params.courseCode
   const semester = req.params.semester
   try {
-    const dbResponse = yield db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
+    const dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
     let returnObject = {
       usedRounds: [],
       publishedAnalysis: [],
