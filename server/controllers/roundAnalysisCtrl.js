@@ -38,11 +38,11 @@ async function postRoundAnalysis (req, res, next) {
   try {
     const id = req.body._id
 
-    log.info('Storing roundAnalysis', { id: id })
+    log.debug('Storing roundAnalysis', { id: id })
     const exists = await db.fetchRoundAnalysisById(id)
 
     if (exists) {
-      log.info('roundAnalysis already exists, returning...', { id: id })
+      log.debug('roundAnalysis already exists, returning...', { id: id })
       return res.status(400).json({ message: 'An roundAnalysis with that id already exist.' })
     }
     req.body.changedDate = new Date()
@@ -57,19 +57,19 @@ async function postRoundAnalysis (req, res, next) {
 async function putRoundAnalysis (req, res, next) {
   try {
     const id = req.body._id
-    log.info('Updating roundAnalysis', { id: id })
+    log.debug('Updating roundAnalysis', { id: id })
 
     const doc = db.fetchRoundAnalysisById(id)
 
     if (!doc) {
-      log.info('No roundAnalysis found, returning...', { doc: doc })
+      log.debug('No roundAnalysis found, returning...', { doc: doc })
       return next()
     }
 
     req.body.changedDate = new Date()
     let dbResponse = db.updateRoundAnalysis(req.body)
 
-    log.info('Successfully updated roundAnalysis', { id: dbResponse._id })
+    log.debug('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in putRoundAnalysis', { error: err })
@@ -80,11 +80,11 @@ async function putRoundAnalysis (req, res, next) {
 async function deleteRoundAnalysis (req, res, next) {
   try {
     const id = req.params.id
-    log.info('Delete roundAnalysis', { id: id })
+    log.debug('Delete roundAnalysis', { id: id })
 
     const dbResponse = await db.removeRoundAnalysisById(id)
 
-    log.info('Successfully removed roundAnalysis', { id: id })
+    log.debug('Successfully removed roundAnalysis', { id: id })
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in deleteRoundAnalysis', { error: err })
@@ -103,7 +103,7 @@ async function getAnalysisListByCourseCode (req, res, next) {
       dbResponse = await db.fetchAllRoundAnalysisByCourseCode(courseCode)
     }
 
-    log.info('Successfully got all analysis for', { courseCode: courseCode })
+    log.debug('Successfully got all analysis for', { courseCode: courseCode })
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in getAnalysisListByCourseCode', { error: err })
@@ -143,7 +143,7 @@ async function getUsedRounds (req, res, next) {
         returnObject.usedRounds.push(roundIdList[index2])
       }
     }
-    log.info('Successfully got used round ids for', { courseCode: courseCode, semester: semester, result: returnObject })
+    log.debug('Successfully got used round ids for', { courseCode: courseCode, semester: semester, result: returnObject })
     res.json(returnObject)
   } catch (error) {
     next(error)
