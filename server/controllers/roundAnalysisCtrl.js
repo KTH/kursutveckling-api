@@ -96,7 +96,6 @@ async function getAnalysisListByCourseCode (req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
   const semester = req.params.semester || ''
   let dbResponse
-  console.log('!!!!semester!!!!', semester)
   try {
     if (semester.length === 5) {
       dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester)
