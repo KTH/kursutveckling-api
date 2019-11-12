@@ -59,7 +59,7 @@ async function putRoundAnalysis (req, res, next) {
     const id = req.body._id
     log.debug('Updating roundAnalysis', { id: id })
 
-    const doc = db.fetchRoundAnalysisById(id)
+    const doc = await db.fetchRoundAnalysisById(id)
 
     if (!doc) {
       log.debug('No roundAnalysis found, returning...', { doc: doc })
@@ -67,7 +67,7 @@ async function putRoundAnalysis (req, res, next) {
     }
 
     req.body.changedDate = new Date()
-    let dbResponse = db.updateRoundAnalysis(req.body)
+    let dbResponse = await db.updateRoundAnalysis(req.body)
 
     log.debug('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
