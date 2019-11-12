@@ -21,7 +21,6 @@ const schema = mongoose.Schema({
 })
 
 const CourseUsedRoundsHandler = mongoose.model('CourseUsedRoundsHandler', schema)
-// console.log('CourseUsedRoundsHandler', CourseUsedRoundsHandler)
 
 module.exports = {
   CourseUsedRoundsHandler: CourseUsedRoundsHandler,
