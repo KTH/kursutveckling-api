@@ -14,6 +14,7 @@ module.exports = {
   putAnalysis: co.wrap(putRoundAnalysis),
   deleteAnalysis: co.wrap(deleteRoundAnalysis),
   getAnalysisList: co.wrap(getAnalysisListByCourseCode),
+  getCourseAnalyses: co.wrap(getCourseAnalyses),
   getUsedRounds: co.wrap(getUsedRounds)
 }
 
@@ -107,6 +108,17 @@ async function getAnalysisListByCourseCode (req, res, next) {
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in getAnalysisListByCourseCode', { error: err })
+    next(err)
+  }
+}
+
+async function getCourseAnalyses (req, res, next) {
+  const semester = req.params.semester.toUpperCase()
+  log.debug('getCourseAnalyses for semester: ', semester)
+  try {
+    // db call
+  } catch (err) {
+    log.error('Error in getCourseAnalyses', { error: err })
     next(err)
   }
 }
