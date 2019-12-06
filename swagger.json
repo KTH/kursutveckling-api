@@ -182,22 +182,22 @@
         }
       }
     },
-    "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}":{
-      "get":{
+    "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}": {
+      "get": {
         "operationId": "getUsedRounds",
         "summary": "Gets a list of used round ids for a semester in a course",
-        "parameters":[
+        "parameters": [
           {
             "name": "courseCode",
             "in": "path",
             "description": "Course code, six or seven characters",
             "required": true,
-            "type":"string"
+            "type": "string"
           },
           {
             "name": "semester",
             "description": "Semester for rounds",
-            "in":"path",
+            "in": "path",
             "required": true,
             "type": "string"
           }
@@ -223,10 +223,10 @@
           "api_key": [
             "read"
           ]
+        }
       }
-    }
-  },
- "/v1/courseAnalysisList/{courseCode}/{semester}": {
+    },
+    "/v1/courseAnalysisList/{courseCode}/{semester}": {
       "get": {
         "operationId": "getAnalysisListByCourseCode",
         "summary": "Get a list of analyses for a course",
@@ -270,6 +270,44 @@
           ]
         }
       }
+    },
+    "/v1/courseAnalyses/{semester}": {
+      "get": {
+        "operationId": "getCourseAnalysesForSemester",
+        "summary": "Get a list of analyses for a semester",
+        "description": "Gets all analyses for rounds in a semester",
+        "parameters": [
+          {
+            "name": "semester",
+            "in": "path",
+            "description": "Semester code, five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for that semester",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got analyses for requested semester",
+            "schema": {
+              "$ref": "#/definitions/roundAnalysis"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": {
+          "api_key": [
+            "read"
+          ]
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -288,7 +326,7 @@
       "type": "object",
       "required": [
         "courseCode"
-        ],
+      ],
       "properties": {
         "analysisName": {
           "type": "string",
@@ -320,7 +358,7 @@
         },
         "examinationGrade": {
           "type": "array",
-          "items":"string",
+          "items": "string",
           "description": "Precentage of students completed the round(s)"
         },
         "endDate": {
@@ -338,14 +376,14 @@
         "commentChange": {
           "type": "string",
           "description": "Mandatory text if changes are made after analysis been published"
-         },
+        },
         "isPublished": {
           "type": "string",
           "description": "Sets to true when analysis is published"
         },
         "publishedDate": {
           "type": "string",
-          "description": "Date when analysis is first published" 
+          "description": "Date when analysis is first published"
         },
         "pdfAnalysisDate": {
           "type": "string",
@@ -362,7 +400,7 @@
         "changedBy": {
           "type": "string",
           "description": "Username of creator of the analysis"
-        }, 
+        },
         "semester": {
           "type": "string",
           "description": "Course semester for analysis"
@@ -378,10 +416,10 @@
         "pmFileName": {
           "type": "string",
           "description": "Name of uploaded pm/memo file"
-        },      
+        },
         "ugKeys": {
           "type": "array",
-          "items":"string",
+          "items": "string",
           "description": "UG Keys for user access to edit analysis"
         },
         "syllabusStartTerm": {
@@ -422,50 +460,50 @@
         }
       }
     },
-      "usedRoundsForCourseAndSemester":{
-        "properties": {
-          "usedRounds": {
-            "type": "array",
-            "items": "string",
-            "description": "List of round ids that have been used for a course semester"
-          },
-          "publishedAnalysis": {
-            "type": "array",
-            "items":{
+    "usedRoundsForCourseAndSemester": {
+      "properties": {
+        "usedRounds": {
+          "type": "array",
+          "items": "string",
+          "description": "List of round ids that have been used for a course semester"
+        },
+        "publishedAnalysis": {
+          "type": "array",
+          "items": {
             "schema": {
               "$ref": "#/definitions/UsedAnalysis"
             }
-            },
-            "description": "List of published analysis, name, id, UGkeys"
           },
-          "draftAnalysis": {
-            "type": "array",
-            "items":{
+          "description": "List of published analysis, name, id, UGkeys"
+        },
+        "draftAnalysis": {
+          "type": "array",
+          "items": {
             "schema": {
               "$ref": "#/definitions/UsedAnalysis"
             }
-            },
-            "description": "List of draft analysis, name, id, UGkeys"
-          }
+          },
+          "description": "List of draft analysis, name, id, UGkeys"
         }
-      },
-    "UsedAnalysis":{
-      "properties":{
+      }
+    },
+    "UsedAnalysis": {
+      "properties": {
         "user": {
           "type": "string"
         },
         "isPublished": {
-          "type":"boolean"
+          "type": "boolean"
         },
         "analysisId": {
-          "type":"string"
+          "type": "string"
         },
         "analysisName": {
-          "type":"string"
+          "type": "string"
         },
         "ugKeys": {
-          "type":"array",
-          "items":"string"
+          "type": "array",
+          "items": "string"
         }
       }
     },

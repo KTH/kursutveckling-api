@@ -13,7 +13,8 @@ module.exports = {
   updateRoundAnalysis: _updateRoundAnalysis,
   removeRoundAnalysisById: _removeRoundAnalysisById,
   fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
-  fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester
+  fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester,
+  fetchAllRoundAnalysisBySemester: _fetchAllRoundAnalysisBySemester
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -54,4 +55,9 @@ function _fetchAllRoundAnalysisByCourseCode (courseCode) {
 function _fetchAllRoundAnalysisByCourseCodeAndSemester (courseCode, semester) {
   log.debug('Fetching all roundAnalysis for ' + courseCode + ' filtered by semester: ' + semester)
   return RoundAnalysis.find({ courseCode: courseCode, semester: semester }).populate('usedRoundsForCourseAndSemester').lean()
+}
+
+function _fetchAllRoundAnalysisBySemester (semester) {
+  log.debug('Fetching all round analyses for semester ', semester)
+  return RoundAnalysis.find({ semester: semester }).populate('courseRoundAnalysis').lean()
 }
