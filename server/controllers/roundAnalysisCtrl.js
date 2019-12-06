@@ -114,9 +114,11 @@ async function getAnalysisListByCourseCode (req, res, next) {
 
 async function getCourseAnalyses (req, res, next) {
   const semester = req.params.semester.toUpperCase()
-  log.debug('getCourseAnalyses for semester: ', semester)
+  let dbResponse
   try {
-    // db call
+    dbResponse = await db.fetchAllRoundAnalysisBySemester(semester)
+    log.debug('Successfully got all analyses for semester ', semester)
+    res.json(dbResponse)
   } catch (err) {
     log.error('Error in getCourseAnalyses', { error: err })
     next(err)
