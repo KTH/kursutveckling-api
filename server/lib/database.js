@@ -1,11 +1,6 @@
-const ObjectID = require('mongodb').ObjectID
-const { safeGet } = require('safe-utils')
 const log = require('kth-node-log')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
-const CourseUsedRoundsHandler = require('../models/courseUsedRoundsHandler').CourseUsedRoundsHandler
 const co = require('co')
-// const Level = require('../models/level').Level
-// const crypt = require('./crypt')
 
 module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
@@ -14,7 +9,7 @@ module.exports = {
   removeRoundAnalysisById: _removeRoundAnalysisById,
   fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
   fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester,
-  fetchAllRoundAnalysisBySemester: _fetchAllRoundAnalysisBySemester
+  fetchAllPublishedRoundAnalysisBySemester: _fetchAllPublishedRoundAnalysisBySemester
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -57,7 +52,7 @@ function _fetchAllRoundAnalysisByCourseCodeAndSemester (courseCode, semester) {
   return RoundAnalysis.find({ courseCode: courseCode, semester: semester }).populate('usedRoundsForCourseAndSemester').lean()
 }
 
-function _fetchAllRoundAnalysisBySemester (semester) {
+function _fetchAllPublishedRoundAnalysisBySemester (semester) {
   log.debug('Fetching all round analyses for semester ', semester)
-  return RoundAnalysis.find({ semester: semester }).populate('courseRoundAnalysis').lean()
+  return RoundAnalysis.find({ semester: semester, isPublished: true }).populate('courseRoundAnalysis').lean()
 }
