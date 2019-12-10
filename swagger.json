@@ -274,8 +274,8 @@
     "/v1/courseAnalyses/{semester}": {
       "get": {
         "operationId": "getCourseAnalysesForSemester",
-        "summary": "Get a list of analyses for a semester",
-        "description": "Gets all analyses for rounds in a semester",
+        "summary": "Get a list of published analyses for a semester",
+        "description": "Gets all published analyses for rounds in a semester",
         "parameters": [
           {
             "name": "semester",
@@ -290,7 +290,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully got analyses for requested semester",
+            "description": "Successfully got published analyses for requested semester",
             "schema": {
               "$ref": "#/definitions/roundAnalysis"
             }
