@@ -317,7 +317,7 @@
         ]
       }
     },
-    "/v1/archiveFragment/{id}": {
+    "/v1/archiveFragment": {
       "post": {
         "operationId": "postArchiveFragment",
         "summary": "Saves an archive fragment in the database",
