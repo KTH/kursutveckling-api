@@ -1,6 +1,6 @@
 const log = require('kth-node-log')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
-const ArchiveFragment = require('../models/ArchiveFragment').ArchiveFragment
+const ArchiveFragment = require('../models/archiveFragment').ArchiveFragment
 
 module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
