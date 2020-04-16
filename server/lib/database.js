@@ -1,6 +1,6 @@
 const log = require('kth-node-log')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
-const co = require('co')
+const ArchiveFragment = require('../models/ArchiveFragment').ArchiveFragment
 
 module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
@@ -9,7 +9,8 @@ module.exports = {
   removeRoundAnalysisById: _removeRoundAnalysisById,
   fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
   fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester,
-  fetchAllPublishedRoundAnalysisBySemester: _fetchAllPublishedRoundAnalysisBySemester
+  fetchAllPublishedRoundAnalysisBySemester: _fetchAllPublishedRoundAnalysisBySemester,
+  storeArchiveFragment: _storeArchiveFragment
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -55,4 +56,10 @@ function _fetchAllRoundAnalysisByCourseCodeAndSemester (courseCode, semester) {
 function _fetchAllPublishedRoundAnalysisBySemester (semester) {
   log.debug('Fetching all round analyses for semester ', semester)
   return RoundAnalysis.find({ semester: semester, isPublished: true }).populate('courseRoundAnalysis').lean()
+}
+
+function _storeArchiveFragment (data) {
+  log.debug('Storing archive fragment', data)
+  const doc = new ArchiveFragment(data)
+  return doc.save()
 }

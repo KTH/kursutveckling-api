@@ -33,11 +33,13 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
       }
     },
     "/v1/courseRoundAnalysis/{id}": {
@@ -71,11 +73,13 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
       },
       "post": {
         "operationId": "postCourseRoundAnalysisDataById",
@@ -264,11 +268,13 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
       }
     },
     "/v1/courseAnalyses/{semester}": {
@@ -302,11 +308,51 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/archiveFragment/{id}": {
+      "post": {
+        "operationId": "postArchiveFragment",
+        "summary": "Saves an archive fragment in the database",
+        "description": "Saves an archive fragment in the database",
+        "parameters": [
+          {
+            "name": "archiveFragment",
+            "in": "body",
+            "description": "Archive fragment",
+            "schema": {
+              "$ref": "#/definitions/ArchiveFragment"
+            }
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful save"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "write"
+            ]
+          }
+        ]
       }
     }
   },
@@ -334,7 +380,7 @@
         },
         "courseCode": {
           "type": "string",
-          "description": "Coure code for the course that are connected to the analysis"
+          "description": "Course code for the course that are connected to the analysis"
         },
         "programmeCodes": {
           "type": "string",
@@ -532,6 +578,114 @@
         },
         "fields": {
           "type": "string"
+        }
+      }
+    },
+    "ArchiveFragment": {
+      "type": "object",
+      "required": [
+        "courseCode",
+        "courseName",
+        "courseRound",
+        "semester",
+        "analysisName",
+        "responsibles",
+        "examiners",
+        "publishedDate"
+      ],
+      "properties": {
+        "courseCode": {
+          "type": "string",
+          "description": "Element Kurskod. Mappar mot KIP-databas-element 'courseCode'.",
+          "example": "AE2503"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "Element Kursnamn. Kursbenämning.",
+          "example": "Miljödata"
+        },
+        "courseRound": {
+          "type": "string",
+          "description": "Element Kurstillfalleskod. Mappar mot KIP-databas-element '_id'.",
+          "example": "AE2503HT2017_1"
+        },
+        "semester": {
+          "type": "string",
+          "description": "Element Termin. Mappar mot KIP-databas-element 'semester'.",
+          "example": "HT2017"
+        },
+        "analysisName": {
+          "type": "string",
+          "description": "Element Kursomgangomfang. Mappar mot KIP-databas-element 'analysisName'.",
+          "example": "TIELA ( Startdatum 2016-08-29, Svenska ) , TIDAA ( Startdatum 2016-08-29, Svenska )"
+        },
+        "responsibles": {
+          "type": "string",
+          "description": "Element Kursansvarig. Mappar mot KIP-databas-element 'responsibles'.",
+          "example": "Katrin Grünfeld"
+        },
+        "examiners": {
+          "type": "string",
+          "description": "Element Examinator. Mappar mot KIP-databas-element 'examiners'.",
+          "example": "Ulla Mörtberg"
+        },
+        "description": {
+          "type": "string",
+          "description": "Element Beskrivning. Hårdkodat värde 'Kursanalys'.",
+          "default": "Kursanalys",
+          "example": "Kursanalys"
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Element Publiceringsdatum. Som KIP-databas-element publishedDate, men DateTime-format.",
+          "example": "2019-09-11T14:01:50+00:00"
+        },
+        "preserve": {
+          "type": "integer",
+          "description": "Element Bevaras. Hårdkodat värde 1.",
+          "default": 1,
+          "example": 1
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "schema": {
+              "$ref": "#/definitions/ArchiveAttachment"
+            }
+          },
+          "description": "Element Bilaga. Lista av bilagda filer.",
+          "example": []
+        }
+      }
+    },
+    "ArchiveAttachment": {
+      "type": "object",
+      "required": [
+        "fileName",
+        "remarks",
+        "fileDate",
+        "publishedDate"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Element Filnamn. Mappar mot KIP-databas-element 'analysisFileName'.",
+          "example": "analysis-AE2503HT2017_1.pdf"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "Element Anmarkning. Mappar mot KIP-databas-element 'alterationText'.",
+          "example": "Förändringar från föregående kursomgång: Ny examinationsform inför 2018."
+        },
+        "fileDate": {
+          "type": "string",
+          "description": "Element Expedieringsdatum. Mappar mot KIP-databas-element 'pdfAnalysisDate'.",
+          "example": "2019-08-19"
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Element TidVersion. En tidpunkt (dateTime) för när versionen publicerades. Mappar mot KIP-databas-element 'changeAfterPublishDate', fast på filnivå.",
+          "example": "2019-09-11T14:01:50+00:00"
         }
       }
     }
