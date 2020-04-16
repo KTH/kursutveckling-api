@@ -16,7 +16,7 @@ const archiveAttachmentSchema = mongoose.Schema({
     required: [true, 'Element Expedieringsdatum. Mappar mot KIP-databas-element "pdfAnalysisDate".']
   },
   publishedDate: {
-    type: Date,
+    type: String,
     required: [true, 'Element TidVersion. En tidpunkt (dateTime) för när versionen publicerades. Mappar mot KIP-databas-element "changeAfterPublishDate", fast på filnivå.']
   }
 })
