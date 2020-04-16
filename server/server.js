@@ -105,10 +105,14 @@ server.use('/', systemRoute.getRouter())
 
 // Swagger UI
 const express = require('express')
+
 const swaggerUrl = config.proxyPrefixPath.uri + '/swagger'
+const pathToSwaggerUi = require('swagger-ui-dist').absolutePath()
+
 const redirectUrl = `${swaggerUrl}?url=${getPaths().system.swagger.uri}`
+
 server.use(swaggerUrl, createSwaggerRedirectHandler(redirectUrl, config.proxyPrefixPath.uri))
-server.use(swaggerUrl, express.static(path.join(__dirname, '../node_modules/swagger-ui/dist')))
+server.use(swaggerUrl, express.static(pathToSwaggerUi))
 
 // Add API endpoints defined in swagger to path definitions so we can use them to register API enpoint handlers
 addPaths('api', createApiPaths({
@@ -120,7 +124,7 @@ addPaths('api', createApiPaths({
 const authByApiKey = passport.authenticate('apikey', { session: false })
 
 // Application specific API enpoints
-const { Sample, RoundAnalysis } = require('./controllers')
+const { Archive, RoundAnalysis } = require('./controllers')
 const ApiRouter = require('kth-node-express-routing').ApiRouter
 const apiRoute = ApiRouter(authByApiKey)
 const paths = getPaths()
@@ -135,6 +139,9 @@ apiRoute.register(paths.api.deleteCourseRoundAnalysisDataById, RoundAnalysis.del
 apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalysisList)
 apiRoute.register(paths.api.getCourseAnalysesForSemester, RoundAnalysis.getCourseAnalyses)
 apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)
+
+apiRoute.register(paths.api.postArchiveFragment, Archive.postArchiveFragment)
+
 server.use('/', apiRoute.getRouter())
 
 // Catch not found and errors
