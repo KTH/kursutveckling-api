@@ -78,13 +78,6 @@ custom project.
   folder should only be edited in the template project. The paths
   for the routes come from the `swagger.json` file.
 
-- `server/controllers/sampleCtrl.js`
-
-  This file contains the sample controller. You can either rename
-  or remove this file. You can add your own controllers to this
-  folder. Remember to add your custom controllers to the `index.js`
-  file.
-
 - `swagger.json`
 
   This file contains the API configuration and documentation.
@@ -151,7 +144,6 @@ or need tests, a simple `echo "ok"` will suffice.
 [api]: https://github.com/KTH/node-api
 [web]: https://github.com/KTH/node-web
 [tape]: https://github.com/substack/tape
-[sample-test]: test/unit/specs/sampleCtrl-test.js
 [swagger]: http://swagger.io/
 
 ...
