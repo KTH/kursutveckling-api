@@ -353,6 +353,42 @@
             ]
           }
         ]
+      },
+      "put": {
+        "operationId": "putArchiveFragment",
+        "summary": "Saves an archive fragment in the database",
+        "description": "Saves an archive fragment in the database. Currently identical to post.",
+        "parameters": [
+          {
+            "name": "archiveFragment",
+            "in": "body",
+            "description": "Archive fragment",
+            "schema": {
+              "$ref": "#/definitions/ArchiveFragment"
+            }
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful save"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "write"
+            ]
+          }
+        ]
       }
     }
   },

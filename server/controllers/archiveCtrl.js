@@ -4,7 +4,8 @@ const log = require('kth-node-log')
 const db = require('../lib/database')
 
 module.exports = {
-  postArchiveFragment: _postArchiveFragment
+  postArchiveFragment: _postArchiveFragment,
+  putArchiveFragment: _putArchiveFragment
 }
 
 async function _postArchiveFragment (req, res, next) {
@@ -13,6 +14,18 @@ async function _postArchiveFragment (req, res, next) {
     res.status(201).json(dbResponse)
   } catch (err) {
     log.error('Error in _postArchiveFragment', { error: err })
+    next(err)
+  }
+}
+
+// Currently identical to _postArchiveFragment.
+// Future implementations might mean another db method call for put.
+async function _putArchiveFragment (req, res, next) {
+  try {
+    const dbResponse = await db.storeArchiveFragment(req.body)
+    res.status(201).json(dbResponse)
+  } catch (err) {
+    log.error('Error in _putArchiveFragment', { error: err })
     next(err)
   }
 }
