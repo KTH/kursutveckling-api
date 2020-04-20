@@ -142,6 +142,7 @@ apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)
 
 apiRoute.register(paths.api.postArchiveFragment, Archive.postArchiveFragment)
 apiRoute.register(paths.api.putArchiveFragment, Archive.putArchiveFragment)
+apiRoute.register(paths.api.getArchiveFragments, Archive.getArchiveFragments)
 
 server.use('/', apiRoute.getRouter())
 
