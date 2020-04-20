@@ -10,7 +10,8 @@ module.exports = {
   fetchAllRoundAnalysisByCourseCode: _fetchAllRoundAnalysisByCourseCode,
   fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester,
   fetchAllPublishedRoundAnalysisBySemester: _fetchAllPublishedRoundAnalysisBySemester,
-  storeArchiveFragment: _storeArchiveFragment
+  storeArchiveFragment: _storeArchiveFragment,
+  fetchAllArchiveFragments: _fetchAllArchiveFragments
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -62,4 +63,9 @@ function _storeArchiveFragment (data) {
   log.debug('Storing archive fragment', data)
   const doc = new ArchiveFragment(data)
   return doc.save()
+}
+
+function _fetchAllArchiveFragments () {
+  log.debug('Fetching all archive fragments')
+  return ArchiveFragment.find({ }).populate('ArchiveFragmentList').lean()
 }

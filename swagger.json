@@ -389,6 +389,36 @@
             ]
           }
         ]
+      },
+      "get": {
+        "operationId": "getArchiveFragments",
+        "summary": "Gets a list of all archived fragments",
+        "description": "Gets a list of all archived fragments.",
+        "parameters": [],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got archived fragments",
+            "schema": {
+              "$ref": "#/definitions/ArchiveFragmentList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
       }
     }
   },
@@ -724,6 +754,16 @@
           "example": "2019-09-11T14:01:50+00:00"
         }
       }
+    },
+    "ArchiveFragmentList": {
+      "type": "array",
+      "items": {
+        "schema": {
+          "$ref": "#/definitions/ArchiveFragment"
+        }
+      },
+      "description": "List of archive fragments",
+      "example": []
     }
   }
 }
