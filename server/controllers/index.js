@@ -7,5 +7,5 @@ module.exports = {
   // Replace with actual API controller
   Sample: require('./sampleCtrl'),
   RoundAnalysis: require('./roundAnalysisCtrl'),
-  Archive: require('./roundArchiveCtrl')
+  Archive: require('./archiveCtrl')
 }

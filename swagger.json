@@ -353,6 +353,42 @@
             ]
           }
         ]
+      },
+      "put": {
+        "operationId": "putArchiveFragment",
+        "summary": "Saves an archive fragment in the database",
+        "description": "Saves an archive fragment in the database. Currently identical to post.",
+        "parameters": [
+          {
+            "name": "archiveFragment",
+            "in": "body",
+            "description": "Archive fragment",
+            "schema": {
+              "$ref": "#/definitions/ArchiveFragment"
+            }
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful save"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "write"
+            ]
+          }
+        ]
       }
     }
   },
@@ -684,7 +720,7 @@
         },
         "publishedDate": {
           "type": "string",
-          "description": "Element TidVersion. En tidpunkt (dateTime) för när versionen publicerades. Mappar mot KIP-databas-element 'changeAfterPublishDate', fast på filnivå.",
+          "description": "Element TidVersion. En tidpunkt (dateTime) för när versionen publicerades. Mappar mot KIP-databas-element 'changedAfterPublishedDate', fast på filnivå.",
           "example": "2019-09-11T14:01:50+00:00"
         }
       }
