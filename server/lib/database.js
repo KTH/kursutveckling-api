@@ -1,4 +1,5 @@
 const log = require('kth-node-log')
+const mongoose = require('mongoose')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
 const ArchiveFragment = require('../models/archiveFragment').ArchiveFragment
 
@@ -11,7 +12,9 @@ module.exports = {
   fetchAllRoundAnalysisByCourseCodeAndSemester: _fetchAllRoundAnalysisByCourseCodeAndSemester,
   fetchAllPublishedRoundAnalysisBySemester: _fetchAllPublishedRoundAnalysisBySemester,
   storeArchiveFragment: _storeArchiveFragment,
-  fetchAllArchiveFragments: _fetchAllArchiveFragments
+  fetchAllArchiveFragments: _fetchAllArchiveFragments,
+  fetchArchiveFragments: _fetchArchiveFragments,
+  updateExportedArchiveFragments: _updateExportedArchiveFragments
 }
 
 function _fetchRoundAnalysisById (id) {
@@ -68,4 +71,15 @@ function _storeArchiveFragment (data) {
 function _fetchAllArchiveFragments () {
   log.debug('Fetching all archive fragments')
   return ArchiveFragment.find({ }).populate('ArchiveFragmentList').lean()
+}
+
+function _fetchArchiveFragments (includeExported) {
+  log.debug(includeExported ? 'Fetching all archive fragments, including exported' : 'Fetching all archive fragments, excluding exported')
+  return ArchiveFragment.find({ exported: includeExported }).populate('ArchiveFragmentList').lean()
+}
+
+function _updateExportedArchiveFragments (ids) {
+  const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
+  return ArchiveFragment.update({
+    '_id': { $in: idsQuery } }, { '$set': { 'exported': true } }, { 'multi': true })
 }
