@@ -391,7 +391,7 @@
         ]
       },
       "get": {
-        "operationId": "getArchiveFragments",
+        "operationId": "getAllArchiveFragments",
         "summary": "Gets a list of all archived fragments",
         "description": "Gets a list of all archived fragments.",
         "parameters": [],
@@ -400,7 +400,79 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully got archived fragments",
+            "description": "Successfully got all archived fragments",
+            "schema": {
+              "$ref": "#/definitions/ArchiveFragmentList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "read"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/exportedArchiveFragment": {
+      "put": {
+        "operationId": "putExportedArchiveFragments",
+        "summary": "Updates archive fragments in the database to exported",
+        "description": "Updates archive fragments in the database to exported.",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "body",
+            "description": "Archive fragment document ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": []
+            }
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful save"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "write"
+            ]
+          }
+        ]
+      },
+      "get": {
+        "operationId": "getExportedArchiveFragments",
+        "summary": "Gets a filtered list of all exported archive fragments",
+        "description": "Gets a list of all exported archive fragments.",
+        "parameters": [],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got exported archive fragments",
             "schema": {
               "$ref": "#/definitions/ArchiveFragmentList"
             }

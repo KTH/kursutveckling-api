@@ -65,6 +65,10 @@ const archiveFragmentSchema = mongoose.Schema({
   attachments: {
     type: [archiveAttachmentSchema],
     default: []
+  },
+  exported: {
+    type: Boolean,
+    default: false
   }
 })
 
