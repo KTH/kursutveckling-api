@@ -63,7 +63,8 @@ async function _createArchivePackage (req, res, next) {
     console.log('Create in _createArchivePackage with fragments:', archiveFragments)
     const archivePackageName = 'archive.zip'
     res.status(200).set('Content-Type', 'application/zip').set('Content-Disposition', `attachment;filename=${archivePackageName}`)
-    archive.createPackageStream(archiveFragments).pipe(res)
+    const archivePackageStream = await archive.createPackageStream(archiveFragments)
+    archivePackageStream.pipe(res)
   } catch (err) {
     log.error('Error in _createArchivePackage', { error: err })
     next(err)
