@@ -24,6 +24,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
+    "jszip": "^3.4.0",
     "kth-node-access-log": "^0.2.0",
     "kth-node-api-common": "^0.1.5",
     "kth-node-api-key-strategy": "^1.0.6",
@@ -38,8 +39,7 @@
     "mongoose": "^4.5.8",
     "passport": "^0.4.0",
     "safe-utils": "0.2.1",
-    "swagger-ui-dist": "^3.25.0",
-    "xmlbuilder": "^15.1.1"
+    "swagger-ui-dist": "^3.25.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

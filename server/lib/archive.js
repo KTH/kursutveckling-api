@@ -1,12 +1,12 @@
 const log = require('kth-node-log')
-const builder = require('xmlbuilder')
 const libxml = require('libxmljs')
+const JSZip = require('jszip')
 
 module.exports = {
-  createPackage: _createPackage
+  createPackageStream: _createPackageStream
 }
 
-function _createPackage (fragments) {
+function _createPackageStream (fragments) {
   log.debug('Build XML in _createPackage with:', fragments)
 
   var xmlDoc = new libxml.Document()
@@ -38,7 +38,11 @@ function _createPackage (fragments) {
       .node('Termin', f.semester).parent()
   })
 
-  return xmlDoc.toString()
+  const archivePackage = new JSZip()
+  archivePackage.file('sip.xml', xmlDoc.toString())
+  archivePackage.folder('content').file('dummy.pdf', 'Not a real PDF file.')
+
+  return archivePackage.generateNodeStream({ streamFiles: true })
 
   // xmlDoc.node('Kursspecifikation_ver_2').attr({ xmlns: 'Kursspecifikation_ver_2' })
   //   .node('Identitet', identitet || '').parent()
