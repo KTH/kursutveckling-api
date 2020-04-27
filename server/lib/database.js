@@ -73,13 +73,14 @@ function _fetchAllArchiveFragments () {
   return ArchiveFragment.find({ }).populate('ArchiveFragmentList').lean()
 }
 
-function _fetchArchiveFragments (includeExported) {
-  log.debug(includeExported ? 'Fetching all archive fragments, including exported' : 'Fetching all archive fragments, excluding exported')
-  return ArchiveFragment.find({ exported: includeExported }).populate('ArchiveFragmentList').lean()
+function _fetchArchiveFragments (ids) {
+  log.debug('Fetching archive fragments with id:s', ids)
+  const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
+  return ArchiveFragment.find({ '_id': { '$in': idsQuery } }).populate('ArchiveFragmentList').lean()
 }
 
 function _updateExportedArchiveFragments (ids) {
   const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
   return ArchiveFragment.update({
-    '_id': { $in: idsQuery } }, { '$set': { 'exported': true } }, { 'multi': true })
+    '_id': { '$in': idsQuery } }, { '$set': { 'exported': true } }, { 'multi': true })
 }

@@ -2,13 +2,14 @@
 
 const log = require('kth-node-log')
 const db = require('../lib/database')
+const archive = require('../lib/archive')
 
 module.exports = {
   postArchiveFragment: _postArchiveFragment,
   putArchiveFragment: _putArchiveFragment,
   getAllArchiveFragments: _getAllArchiveFragments,
-  getExportedArchiveFragments: _getExportedArchiveFragments,
-  putExportedArchiveFragments: _putExportedArchiveFragments
+  putExportedArchiveFragments: _putExportedArchiveFragments,
+  createArchivePackage: _createArchivePackage
 }
 
 async function _postArchiveFragment (req, res, next) {
@@ -43,16 +44,6 @@ async function _getAllArchiveFragments (req, res, next) {
   }
 }
 
-async function _getExportedArchiveFragments (req, res, next) {
-  try {
-    const dbResponse = await db.fetchArchiveFragments(true)
-    res.status(200).json(dbResponse)
-  } catch (err) {
-    log.error('Error in _getArchiveFragments', { error: err })
-    next(err)
-  }
-}
-
 async function _putExportedArchiveFragments (req, res, next) {
   try {
     const ids = req.body
@@ -60,6 +51,21 @@ async function _putExportedArchiveFragments (req, res, next) {
     res.status(200).json(dbResponse)
   } catch (err) {
     log.error('Error in _putExportedArchiveFragments', { error: err })
+    next(err)
+  }
+}
+
+async function _createArchivePackage (req, res, next) {
+  try {
+    const ids = req.body
+    log.debug('Create in _createArchivePackage with ids:', ids)
+    const archiveFragments = await db.fetchArchiveFragments(ids)
+    console.log('Create in _createArchivePackage with fragments:', archiveFragments)
+    const archivePackageName = 'archive.zip'
+    res.status(200).set('Content-Type', 'application/zip').set('Content-Disposition', `attachment;filename=${archivePackageName}`)
+    archive.createPackageStream(archiveFragments).pipe(res)
+  } catch (err) {
+    log.error('Error in _createArchivePackage', { error: err })
     next(err)
   }
 }
