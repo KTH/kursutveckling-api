@@ -461,20 +461,38 @@
             ]
           }
         ]
-      },
-      "get": {
-        "operationId": "getExportedArchiveFragments",
-        "summary": "Gets a filtered list of all exported archive fragments",
-        "description": "Gets a list of all exported archive fragments.",
-        "parameters": [],
+      }
+    },
+    "/v1/createArchivePackage": {
+      "post": {
+        "operationId": "createArchivePackage",
+        "summary": "Create an archive package",
+        "description": "Creates an archive package out of archive fragments. Selection of fragments is based on supplied id:s. Used archive fragments will be marked as exported.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "archiveFragmentIds",
+            "in": "body",
+            "description": "Selected archive fragment id:s to be included in package.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": []
+            }
+          }
+        ],
         "tags": [
           "v1"
         ],
         "responses": {
           "200": {
-            "description": "Successfully got exported archive fragments",
+            "description": "Successfully created an archive package",
             "schema": {
-              "$ref": "#/definitions/ArchiveFragmentList"
+              "type": "file"
             }
           },
           "default": {
@@ -487,7 +505,7 @@
         "security": [
           {
             "api_key": [
-              "read"
+              "write"
             ]
           }
         ]
