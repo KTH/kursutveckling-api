@@ -9,6 +9,13 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "api_key"
+    }
+  },
   "paths": {
     "/_checkAPIkey": {
       "get": {
@@ -35,9 +42,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "read"
-            ]
+            "api_key": []
           }
         ]
       }
@@ -75,9 +80,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "read"
-            ]
+            "api_key": []
           }
         ]
       },
@@ -86,6 +89,13 @@
         "summary": "Saves an analysis object in the database",
         "description": "Saves an analysis object in the database",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the round.semester.year.x to get analysis data",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "roundAnalysisData",
             "in": "body",
@@ -109,17 +119,24 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "write"
-          ]
-        }
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       },
       "put": {
         "operationId": "putCourseRoundAnalysisDataById",
         "summary": "Updates an analysis",
         "description": "Saves changes to an analysis in the database",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the round.semester.year.x to get analysis data",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "roundAnalysisData",
             "in": "body",
@@ -143,11 +160,11 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "write"
-          ]
-        }
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       },
       "delete": {
         "operationId": "deleteCourseRoundAnalysisDataById",
@@ -179,11 +196,11 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}": {
@@ -223,14 +240,14 @@
             }
           }
         },
-        "security": {
-          "api_key": [
-            "read"
-          ]
-        }
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
-    "/v1/courseAnalysisList/{courseCode}/{semester}": {
+    "/v1/courseAnalysisList/{courseCode}": {
       "get": {
         "operationId": "getAnalysisListByCourseCode",
         "summary": "Get a list of analyses for a course",
@@ -241,13 +258,6 @@
             "in": "path",
             "description": "Id of the course code",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "semester",
-            "in": "path",
-            "description": "Semester code, five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for that semester",
-            "required": false,
             "type": "string"
           }
         ],
@@ -270,9 +280,52 @@
         },
         "security": [
           {
-            "api_key": [
-              "read"
-            ]
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/v1/courseAnalysisList/{courseCode}/{semester}": {
+      "get": {
+        "operationId": "getAnalysisListByCourseCodeSemester",
+        "summary": "Get a list of analyses for a course",
+        "description": "Gets analyses for rounds in a course",
+        "parameters": [
+          {
+            "name": "courseCode",
+            "in": "path",
+            "description": "Id of the course code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "semester",
+            "in": "path",
+            "description": "Semester code, five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for that semester",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got analyses for requested course code and semester",
+            "schema": {
+              "$ref": "#/definitions/roundAnalysis"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
           }
         ]
       }
@@ -310,9 +363,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "read"
-            ]
+            "api_key": []
           }
         ]
       }
@@ -348,9 +399,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "write"
-            ]
+            "api_key": []
           }
         ]
       },
@@ -384,9 +433,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "write"
-            ]
+            "api_key": []
           }
         ]
       },
@@ -414,9 +461,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "read"
-            ]
+            "api_key": []
           }
         ]
       }
@@ -456,9 +501,7 @@
         },
         "security": [
           {
-            "api_key": [
-              "write"
-            ]
+            "api_key": []
           }
         ]
       }
@@ -504,22 +547,9 @@
         },
         "security": [
           {
-            "api_key": [
-              "write"
-            ]
+            "api_key": []
           }
         ]
-      }
-    }
-  },
-  "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header",
-      "scopes": {
-        "read": "Read access to data",
-        "write": "Write access to data"
       }
     }
   },
@@ -560,7 +590,9 @@
         },
         "examinationGrade": {
           "type": "array",
-          "items": "string",
+          "items": {
+            "type": "string"
+          },
           "description": "Precentage of students completed the round(s)"
         },
         "endDate": {
@@ -621,7 +653,9 @@
         },
         "ugKeys": {
           "type": "array",
-          "items": "string",
+          "items": {
+            "type": "string"
+          },
           "description": "UG Keys for user access to edit analysis"
         },
         "syllabusStartTerm": {
@@ -658,6 +692,9 @@
         },
         "ladokUIDs": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "The UIDs collected from Ladok"
         }
       }
@@ -666,24 +703,22 @@
       "properties": {
         "usedRounds": {
           "type": "array",
-          "items": "string",
+          "items": {
+            "type": "string"
+          },
           "description": "List of round ids that have been used for a course semester"
         },
         "publishedAnalysis": {
           "type": "array",
           "items": {
-            "schema": {
-              "$ref": "#/definitions/UsedAnalysis"
-            }
+            "$ref": "#/definitions/UsedAnalysis"
           },
           "description": "List of published analysis, name, id, UGkeys"
         },
         "draftAnalysis": {
           "type": "array",
           "items": {
-            "schema": {
-              "$ref": "#/definitions/UsedAnalysis"
-            }
+            "$ref": "#/definitions/UsedAnalysis"
           },
           "description": "List of draft analysis, name, id, UGkeys"
         }
@@ -705,7 +740,9 @@
         },
         "ugKeys": {
           "type": "array",
-          "items": "string"
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -805,9 +842,7 @@
         "attachments": {
           "type": "array",
           "items": {
-            "schema": {
-              "$ref": "#/definitions/ArchiveAttachment"
-            }
+            "$ref": "#/definitions/ArchiveAttachment"
           },
           "description": "Element Bilaga. Lista av bilagda filer.",
           "example": []
@@ -848,9 +883,7 @@
     "ArchiveFragmentList": {
       "type": "array",
       "items": {
-        "schema": {
-          "$ref": "#/definitions/ArchiveFragment"
-        }
+        "$ref": "#/definitions/ArchiveFragment"
       },
       "description": "List of archive fragments",
       "example": []
