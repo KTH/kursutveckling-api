@@ -47,6 +47,7 @@ async function _getAllArchiveFragments (req, res, next) {
 async function _putExportedArchiveFragments (req, res, next) {
   try {
     const ids = req.body
+    log.debug('Set exported in _putExportedArchiveFragments with ids:', ids)
     const dbResponse = await db.updateExportedArchiveFragments(ids)
     res.status(200).json(dbResponse)
   } catch (err) {

@@ -466,7 +466,7 @@
         ]
       }
     },
-    "/v1/exportedArchiveFragment": {
+    "/v1/putExportedArchiveFragments": {
       "put": {
         "operationId": "putExportedArchiveFragments",
         "summary": "Updates archive fragments in the database to exported",
