@@ -82,5 +82,5 @@ function _fetchArchiveFragments (ids) {
 function _updateExportedArchiveFragments (ids) {
   const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
   return ArchiveFragment.update({
-    '_id': { '$in': idsQuery } }, { '$set': { 'exported': true } }, { 'multi': true })
+    '_id': { '$in': idsQuery }, 'courseCode': { $exists: true } }, { '$set': { 'exported': true } }, { 'multi': true })
 }
