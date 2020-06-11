@@ -39,6 +39,7 @@ async function _createPackageStream (fragments) {
   fragments.forEach(f => {
     const beforeAttachment = xmlDoc.root().node('Kurs')
       .node('Kurskod', f.courseCode).parent()
+      .node('Kursnamn', f.courseName).parent()
       .node('Kursomgang')
       .node('Kursomgangskod', f.courseRound).parent()
       .node('Termin', f.semester).parent()
