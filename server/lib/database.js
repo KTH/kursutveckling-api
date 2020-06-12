@@ -79,8 +79,14 @@ function _fetchArchiveFragments (ids) {
   return ArchiveFragment.find({ '_id': { '$in': idsQuery } }).populate('ArchiveFragmentList').lean()
 }
 
-function _updateExportedArchiveFragments (ids) {
-  const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
-  return ArchiveFragment.update({
-    '_id': { '$in': idsQuery }, 'courseCode': { $exists: true } }, { '$set': { 'exported': true } }, { 'multi': true })
+async function _updateExportedArchiveFragments (keys) {
+  // const idsQuery = ids.map(function (id) { return mongoose.Types.ObjectId(id) })
+  const dbResponses = {}
+  for (let index = 0; index < keys.length; index++) {
+    const key = keys[index]
+    const dbResonse = await ArchiveFragment.update({
+      '_id': key.id, 'courseCode': key.courseCode }, { '$set': { 'exported': true } })
+    dbResponses[key.id] = dbResonse
+  }
+  return dbResponses
 }

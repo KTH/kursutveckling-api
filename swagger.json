@@ -473,15 +473,15 @@
         "description": "Updates archive fragments in the database to exported.",
         "parameters": [
           {
-            "name": "ids",
+            "name": "keys",
             "in": "body",
-            "description": "Archive fragment document ids",
+            "description": "Archive fragment document keys",
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object"
               },
-              "example": []
+              "example": {}
             }
           }
         ],
