@@ -9,13 +9,6 @@
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "api_key"
-    }
-  },
   "paths": {
     "/_checkAPIkey": {
       "get": {
@@ -42,7 +35,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -80,7 +73,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       },
@@ -121,7 +114,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       },
@@ -162,7 +155,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       },
@@ -198,7 +191,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       }
@@ -242,7 +235,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -280,7 +273,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -325,7 +318,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -363,7 +356,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -399,7 +392,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       },
@@ -433,7 +426,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       },
@@ -461,7 +454,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["read"]
           }
         ]
       }
@@ -501,7 +494,7 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
       }
@@ -547,9 +540,20 @@
         },
         "security": [
           {
-            "api_key": []
+            "api_key": ["write"]
           }
         ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header",
+      "scopes": {
+        "read": "Read access to data",
+        "write": "Write access to data"
       }
     }
   },
