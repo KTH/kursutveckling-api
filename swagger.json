@@ -6,9 +6,7 @@
     "version": "1.0.0"
   },
   "basePath": "/api/kursutveckling",
-  "produces": [
-    "application/json"
-  ],
+  "produces": ["application/json", "application/zip"],
   "paths": {
     "/_checkAPIkey": {
       "get": {
@@ -16,15 +14,10 @@
         "summary": "GET a test endpoint that is protected by api key to validate that consumer has a proper api key",
         "description": "",
         "parameters": [],
-        "tags": [
-          "system"
-        ],
+        "tags": ["system"],
         "responses": {
           "200": {
-            "description": "An empty response",
-            "schema": {
-              "$ref": "#/definitions/UserList"
-            }
+            "description": "An empty response"
           },
           "default": {
             "description": "Unexpected error",
@@ -504,9 +497,6 @@
         "operationId": "createArchivePackage",
         "summary": "Create an archive package",
         "description": "Creates an archive package out of archive fragments. Selection of fragments is based on supplied id:s. Used archive fragments will be marked as exported.",
-        "produces": [
-          "application/zip"
-        ],
         "parameters": [
           {
             "name": "archiveFragmentIds",
