@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
+const { wrap } = require('@kth/kth-node-cosmos-db')
 
 const archiveAttachmentSchema = mongoose.Schema({
   fileName: {
@@ -72,7 +73,7 @@ const archiveFragmentSchema = mongoose.Schema({
   }
 })
 
-const ArchiveFragment = mongoose.model('ArchiveFragment', archiveFragmentSchema)
+const ArchiveFragment = wrap(mongoose.model('ArchiveFragment', archiveFragmentSchema))
 
 module.exports = {
   ArchiveFragment: ArchiveFragment,

@@ -5,6 +5,7 @@
  */
 
 const mongoose = require('mongoose')
+const { wrap } = require('@kth/kth-node-cosmos-db')
 
 const schema = mongoose.Schema({
   _id: String,
@@ -202,7 +203,7 @@ const schema = mongoose.Schema({
   }
 })
 
-const RoundAnalysis = mongoose.model('RoundAnalysis', schema)
+const RoundAnalysis = wrap(mongoose.model('RoundAnalysis', schema))
 
 module.exports = {
   RoundAnalysis: RoundAnalysis,

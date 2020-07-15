@@ -1,10 +1,7 @@
 'use strict'
 
-/**
- * Sample API model. Can safely be removed.
- */
-
 const mongoose = require('mongoose')
+const { wrap } = require('@kth/kth-node-cosmos-db')
 
 const schema = mongoose.Schema({
   _id: String,
@@ -20,7 +17,7 @@ const schema = mongoose.Schema({
   ]
 })
 
-const CourseUsedRoundsHandler = mongoose.model('CourseUsedRoundsHandler', schema)
+const CourseUsedRoundsHandler = wrap(mongoose.model('CourseUsedRoundsHandler', schema))
 
 module.exports = {
   CourseUsedRoundsHandler: CourseUsedRoundsHandler,
