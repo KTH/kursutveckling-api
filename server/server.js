@@ -120,7 +120,7 @@ addPaths('api', createApiPaths({
 const authByApiKey = passport.authenticate('apikey', { session: false })
 
 // Application specific API enpoints
-const { Sample, RoundAnalysis } = require('./controllers')
+const { RoundAnalysis } = require('./controllers')
 const ApiRouter = require('kth-node-express-routing').ApiRouter
 const apiRoute = ApiRouter(authByApiKey)
 const paths = getPaths()

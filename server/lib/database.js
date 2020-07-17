@@ -1,6 +1,5 @@
 const log = require('kth-node-log')
 const RoundAnalysis = require('../models/roundAnalysis').RoundAnalysis
-const co = require('co')
 
 module.exports = {
   fetchRoundAnalysisById: _fetchRoundAnalysisById,
