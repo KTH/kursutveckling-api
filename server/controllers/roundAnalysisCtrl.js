@@ -1,24 +1,15 @@
+/* eslint-disable consistent-return */
+
 'use strict'
 
 /**
  * API controller
  */
 
-const co = require('co')
 const log = require('kth-node-log')
 const db = require('../lib/database')
 
-module.exports = {
-  getAnalysis: co.wrap(getRoundAnalysis),
-  postAnalysis: co.wrap(postRoundAnalysis),
-  putAnalysis: co.wrap(putRoundAnalysis),
-  deleteAnalysis: co.wrap(deleteRoundAnalysis),
-  getAnalysisList: co.wrap(getAnalysisListByCourseCode),
-  getCourseAnalyses: co.wrap(getCourseAnalyses),
-  getUsedRounds: co.wrap(getUsedRounds)
-}
-
-async function getRoundAnalysis (req, res, next) {
+async function getRoundAnalysis(req, res, next) {
   try {
     let doc = {}
     if (process.env.NODE_MOCK) {
@@ -35,15 +26,15 @@ async function getRoundAnalysis (req, res, next) {
   }
 }
 
-async function postRoundAnalysis (req, res, next) {
+async function postRoundAnalysis(req, res, next) {
   try {
-    const id = req.body._id
+    const { _id: id } = req.body
 
-    log.debug('Storing roundAnalysis', { id: id })
+    log.debug('Storing roundAnalysis', { id })
     const exists = await db.fetchRoundAnalysisById(id)
 
     if (exists) {
-      log.debug('roundAnalysis already exists, returning...', { id: id })
+      log.debug('roundAnalysis already exists, returning...', { id })
       return res.status(400).json({ message: 'An roundAnalysis with that id already exist.' })
     }
     req.body.changedDate = new Date()
@@ -55,20 +46,20 @@ async function postRoundAnalysis (req, res, next) {
   }
 }
 
-async function putRoundAnalysis (req, res, next) {
+async function putRoundAnalysis(req, res, next) {
   try {
-    const id = req.body._id
-    log.debug('Updating roundAnalysis', { id: id })
+    const { _id: id } = req.body
+    log.debug('Updating roundAnalysis', { id })
 
     const doc = await db.fetchRoundAnalysisById(id)
 
     if (!doc) {
-      log.debug('No roundAnalysis found, returning...', { doc: doc })
+      log.debug('No roundAnalysis found, returning...', { doc })
       return next()
     }
 
     req.body.changedDate = new Date()
-    let dbResponse = await db.updateRoundAnalysis(req.body)
+    const dbResponse = await db.updateRoundAnalysis(req.body)
 
     log.debug('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
@@ -78,14 +69,14 @@ async function putRoundAnalysis (req, res, next) {
   }
 }
 
-async function deleteRoundAnalysis (req, res, next) {
+async function deleteRoundAnalysis(req, res, next) {
   try {
-    const id = req.params.id
-    log.debug('Delete roundAnalysis', { id: id })
+    const { id } = req.params
+    log.debug('Delete roundAnalysis', { id })
 
     const dbResponse = await db.removeRoundAnalysisById(id)
 
-    log.debug('Successfully removed roundAnalysis', { id: id })
+    log.debug('Successfully removed roundAnalysis', { id })
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in deleteRoundAnalysis', { error: err })
@@ -93,18 +84,20 @@ async function deleteRoundAnalysis (req, res, next) {
   }
 }
 
-async function getAnalysisListByCourseCode (req, res, next) {
+async function getAnalysisListByCourseCode(req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
   const semester = req.params.semester || ''
   let dbResponse
   try {
     if (semester.length === 5) {
       dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester)
+      log.debug('1 Successfully got all analysis for', { courseCode })
     } else {
       dbResponse = await db.fetchAllRoundAnalysisByCourseCode(courseCode)
+      log.debug('2 Successfully got all analysis for', { courseCode, dbResponse })
     }
 
-    log.debug('Successfully got all analysis for', { courseCode: courseCode })
+    log.debug('Successfully got all analysis for', { courseCode, dbResponse })
     res.json(dbResponse)
   } catch (err) {
     log.error('Error in getAnalysisListByCourseCode', { error: err })
@@ -112,7 +105,7 @@ async function getAnalysisListByCourseCode (req, res, next) {
   }
 }
 
-async function getCourseAnalyses (req, res, next) {
+async function getCourseAnalyses(req, res, next) {
   const semester = req.params.semester.toUpperCase()
   let dbResponse
   try {
@@ -125,15 +118,14 @@ async function getCourseAnalyses (req, res, next) {
   }
 }
 
-async function getUsedRounds (req, res, next) {
-  const courseCode = req.params.courseCode
-  const semester = req.params.semester
+async function getUsedRounds(req, res, next) {
+  const { courseCode, semester } = req.params
   try {
     const dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
     let returnObject = {
       usedRounds: [],
       publishedAnalysis: [],
-      draftAnalysis: []
+      draftAnalysis: [],
     }
 
     let roundIdList = []
@@ -144,7 +136,7 @@ async function getUsedRounds (req, res, next) {
         isPublished: dbResponse[index].isPublished,
         analysisId: dbResponse[index]._id,
         analysisName: dbResponse[index].analysisName,
-        ugKeys: dbResponse[index].ugKeys
+        ugKeys: dbResponse[index].ugKeys,
       }
       if (tempObject.isPublished) {
         returnObject.publishedAnalysis.push(tempObject)
@@ -152,14 +144,31 @@ async function getUsedRounds (req, res, next) {
         returnObject.draftAnalysis.push(tempObject)
       }
 
-      roundIdList = dbResponse[index].roundIdList && dbResponse[index].roundIdList.length > 0 ? dbResponse[index].roundIdList.split(',') : [dbResponse[index].roundIdList]
+      roundIdList =
+        dbResponse[index].roundIdList && dbResponse[index].roundIdList.length > 0
+          ? dbResponse[index].roundIdList.split(',')
+          : [dbResponse[index].roundIdList]
       for (let index2 = 0; index2 < roundIdList.length; index2++) {
         returnObject.usedRounds.push(roundIdList[index2])
       }
     }
-    log.debug('Successfully got used round ids for', { courseCode: courseCode, semester: semester, result: returnObject })
+    log.debug('Successfully got used round ids for', {
+      courseCode,
+      semester,
+      result: returnObject,
+    })
     res.json(returnObject)
   } catch (error) {
     next(error)
   }
+}
+
+module.exports = {
+  getAnalysis: getRoundAnalysis,
+  postAnalysis: postRoundAnalysis,
+  putAnalysis: putRoundAnalysis,
+  deleteAnalysis: deleteRoundAnalysis,
+  getAnalysisList: getAnalysisListByCourseCode,
+  getCourseAnalyses,
+  getUsedRounds,
 }
