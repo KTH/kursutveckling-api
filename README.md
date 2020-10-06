@@ -25,8 +25,6 @@ Only admin pages may change API data while public pages can only read. Therefore
 ### Connected Projects
 - [kursutveckling-web](https://github.com/KTH/kursinfo-web)
 - [kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web)
-- [kurs-pm-web](https://github.com/KTH/kurs-pm-web)
-- [kurs-pm-data-admin-web](https://github.com/KTH/kurs-pm-data-admin-web)
 
 ### Related Projects
 - [node-api](https://github.com/KTH/node-api)
