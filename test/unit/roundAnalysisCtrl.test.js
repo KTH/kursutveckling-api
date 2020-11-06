@@ -38,7 +38,7 @@ jest.mock('../../server/configuration', () => {
       },
       ldap: {},
       proxyPrefixPath: {
-        uri: 'kurs-pm-data',
+        uri: 'kursutveckling',
       },
       collections: ['dev-tests'],
     },
