@@ -33,11 +33,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       }
     },
     "/v1/courseRoundAnalysis/{id}": {
@@ -71,11 +71,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       },
       "post": {
         "operationId": "postCourseRoundAnalysisDataById",
@@ -105,11 +105,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "write"
           ]
-        }
+        }]
       },
       "put": {
         "operationId": "putCourseRoundAnalysisDataById",
@@ -139,11 +139,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "write"
           ]
-        }
+        }]
       },
       "delete": {
         "operationId": "deleteCourseRoundAnalysisDataById",
@@ -175,11 +175,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       }
     },
     "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}": {
@@ -219,11 +219,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       }
     },
     "/v1/courseAnalysisList/{courseCode}/{semester}": {
@@ -264,11 +264,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       }
     },
     "/v1/courseAnalyses/{semester}": {
@@ -302,11 +302,11 @@
             }
           }
         },
-        "security": {
+        "security": [{
           "api_key": [
             "read"
           ]
-        }
+        }]
       }
     }
   },
