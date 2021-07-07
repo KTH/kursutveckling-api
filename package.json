@@ -5,6 +5,7 @@
   "description": "Collect data for course development and history page, used by kursutveckling-web and kursutveckling-admin-web.",
   "main": "app.js",
   "scripts": {
+    "prepare": "husky install",
     "codecheck": "pretty-quick",
     "test-ci": "is-ci \"test\" \"test:watch\"",
     "test": "NODE_ENV=test jest test/unit/*.js",
@@ -46,7 +47,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "is-ci-cli": "^2.2.0",
     "jest": "^27.0.6",
     "nodemon": "^2.0.9",
@@ -56,9 +57,6 @@
   },
   "engines": {
     "node": "12.0.0"
-  },
-  "husky": {
-    "hooks": {}
   },
   "prettier": {
     "trailingComma": "es5",
