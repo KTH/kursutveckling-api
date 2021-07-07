@@ -84,64 +84,57 @@ describe('Test functions of roundAnalysisCtrl.js', () => {
     // process.env = { ...OLD_ENV }
     jest.clearAllMocks()
   })
-  test('getAnalysis-getRoundAnalysis', async done => {
+  test('getAnalysis-getRoundAnalysis', async () => {
     const { getAnalysis } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({})
     const res = buildRes()
     const response = await getAnalysis(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
 
-  test('postAnalysis-postRoundAnalysis, show message that data already exist', async done => {
+  test('postAnalysis-postRoundAnalysis, show message that data already exist', async () => {
     const { postAnalysis } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({ body: { id: 'EF111120191_1' } })
     const res = buildRes()
     const response = await postAnalysis(req, res)
     expect(res.status).toHaveBeenNthCalledWith(1, 400)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
 
-  test('putAnalysis-putRoundAnalysis', async done => {
+  test('putAnalysis-putRoundAnalysis', async () => {
     const { putAnalysis } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({})
     const res = buildRes()
     const response = await putAnalysis(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
 
-  test('deleteAnalysis-deleteRoundAnalysis', async done => {
+  test('deleteAnalysis-deleteRoundAnalysis', async () => {
     const { deleteAnalysis } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({})
     const res = buildRes()
     const response = await deleteAnalysis(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
-  test('getAnalysisList-getAnalysisListByCourseCode', async done => {
+  test('getAnalysisList-getAnalysisListByCourseCode', async () => {
     const { getAnalysisList } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({ params: { courseCode: 'ef1111' } })
     const res = buildRes()
     const response = await getAnalysisList(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
-  test('getCourseAnalyses', async done => {
+  test('getCourseAnalyses', async () => {
     const { getCourseAnalyses } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({ params: { semester: '20192' } })
     const res = buildRes()
     const response = await getCourseAnalyses(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
-  test('getUsedRounds', async done => {
+  test('getUsedRounds', async () => {
     const { getUsedRounds } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({ params: { courseCode: 'ef1111', semester: '20192' } })
     const res = buildRes()
     const response = await getUsedRounds(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
-    done()
   })
 })
