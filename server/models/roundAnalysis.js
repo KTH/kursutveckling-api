@@ -74,7 +74,7 @@ const schema = mongoose.Schema({
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    maxlength: [1500, 'Comment must have at most 1500 characters.'],
+    maxlength: [2000, 'Comment must have at most 2000 characters.'],
     default: ''
   },
   commentExam: {
