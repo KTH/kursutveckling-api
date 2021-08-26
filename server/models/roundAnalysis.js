@@ -10,7 +10,7 @@ const schema = mongoose.Schema({
   _id: String,
   courseCode: {
     type: String,
-    required: [true, 'Enter Course Code']
+    required: [true, 'Enter Course Code'],
   },
   analysisName: {
     type: String,
@@ -18,7 +18,7 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   programmeCodes: {
     type: String,
@@ -26,7 +26,7 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   examiners: {
     type: String,
@@ -34,26 +34,26 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   responsibles: {
     type: String,
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   examinationRounds: {
     type: Array,
     minlength: 0,
-    default: []
+    default: [],
   },
   registeredStudents: {
     type: String,
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   examinationGrade: {
     type: String,
@@ -61,13 +61,13 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   endDate: {
     type: String, // TODO: DATE
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   alterationText: {
     type: String,
@@ -75,14 +75,14 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [2000, 'Comment must have at most 2000 characters.'],
-    default: ''
+    default: '',
   },
   commentExam: {
     type: String,
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   commentChange: {
     type: String,
@@ -90,121 +90,107 @@ const schema = mongoose.Schema({
     trim: true,
     minlength: 0,
     maxlength: [500, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   isPublished: {
     type: Boolean,
-    default: false
+    default: false,
   },
   publishedDate: {
     type: String, // TODO: DATE
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   pdfAnalysisDate: {
     type: String, // TODO: DATE
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
-  },
-  pdfPMDate: {
-    type: String, // TODO: DATE
-    // required: [true, 'Name is required.'],
-    trim: true,
-    minlength: 0,
-    default: ''
+    default: '',
   },
   changedDate: {
     type: String, // TODO: DATE
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   changedBy: {
     type: String,
     // required: [true, 'Name is required.'],
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   semester: {
     type: String,
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   roundIdList: {
     type: String,
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   analysisFileName: {
     type: String,
     trim: true,
     minlength: 0,
     maxlength: [50, 'Comment must have at most 500 characters.'],
-    default: ''
-  },
-  pmFileName: {
-    type: String,
-    trim: true,
-    minlength: 0,
-    maxlength: [50, 'Comment must have at most 500 characters.'],
-    default: ''
+    default: '',
   },
   ugKeys: {
     type: Array,
-    default: []
+    default: [],
   },
   syllabusStartTerm: {
     type: String,
-    default: ''
+    default: '',
   },
   changedAfterPublishedDate: {
     type: String,
-    default: ''
+    default: '',
   },
   examinationGradeFromLadok: {
     type: Boolean,
-    default: false
+    default: false,
   },
   registeredStudentsFromLadok: {
     type: Boolean,
-    default: false
+    default: false,
   },
   registeredStudentsLadok: {
     type: Number,
-    default: -1
+    default: -1,
   },
   examinationGradeLadok: {
     type: Number,
-    default: -1
+    default: -1,
   },
   endDateFromLadok: {
     type: Boolean,
-    default: false
+    default: false,
   },
   endDateLadok: {
     type: String, // TODO: DATE
     trim: true,
     minlength: 0,
-    default: ''
+    default: '',
   },
   ladokUIDs: {
     type: Array,
     minlength: 0,
-    default: []
-  }
+    default: [],
+  },
 })
 
 const RoundAnalysis = mongoose.model('RoundAnalysis', schema)
 
 module.exports = {
   RoundAnalysis: RoundAnalysis,
-  schema: schema
+  schema: schema,
 }

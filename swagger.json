@@ -6,9 +6,7 @@
     "version": "1.0.0"
   },
   "basePath": "/api/kursutveckling",
-  "produces": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
   "paths": {
     "/_checkAPIkey": {
       "get": {
@@ -16,9 +14,7 @@
         "summary": "GET a test endpoint that is protected by api key to validate that consumer has a proper api key",
         "description": "",
         "parameters": [],
-        "tags": [
-          "system"
-        ],
+        "tags": ["system"],
         "responses": {
           "200": {
             "description": "An empty response",
@@ -33,11 +29,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       }
     },
     "/v1/courseRoundAnalysis/{id}": {
@@ -54,9 +50,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "List of analyses for course code and all the data",
@@ -71,11 +65,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       },
       "post": {
         "operationId": "postCourseRoundAnalysisDataById",
@@ -91,9 +85,7 @@
             }
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "A successful save"
@@ -105,11 +97,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "write"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["write"]
+          }
+        ]
       },
       "put": {
         "operationId": "putCourseRoundAnalysisDataById",
@@ -125,9 +117,7 @@
             }
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "A successful update"
@@ -139,11 +129,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "write"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["write"]
+          }
+        ]
       },
       "delete": {
         "operationId": "deleteCourseRoundAnalysisDataById",
@@ -158,9 +148,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "The analysis was deleted",
@@ -175,11 +163,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       }
     },
     "/v1/usedRoundsForCourse/{courseCode}/semester/{semester}": {
@@ -202,9 +190,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "Round ids",
@@ -219,11 +205,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       }
     },
     "/v1/courseAnalysisList/{courseCode}/{semester}": {
@@ -247,9 +233,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "Successfully got analyses for requested course code and semester",
@@ -264,11 +248,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       }
     },
     "/v1/courseAnalyses/{semester}": {
@@ -285,9 +269,7 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "v1"
-        ],
+        "tags": ["v1"],
         "responses": {
           "200": {
             "description": "Successfully got published analyses for requested semester",
@@ -302,11 +284,11 @@
             }
           }
         },
-        "security": [{
-          "api_key": [
-            "read"
-          ]
-        }]
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
       }
     }
   },
@@ -324,9 +306,7 @@
   "definitions": {
     "roundAnalysis": {
       "type": "object",
-      "required": [
-        "courseCode"
-      ],
+      "required": ["courseCode"],
       "properties": {
         "analysisName": {
           "type": "string",
@@ -389,10 +369,6 @@
           "type": "string",
           "description": "Date when analysis file was uploaded"
         },
-        "pdfPMDate": {
-          "type": "string",
-          "description": "Date when pm/memo file was uploaded"
-        },
         "changedDate": {
           "type": "string",
           "description": "Date when an analysis was updated"
@@ -412,10 +388,6 @@
         "analysisFileName": {
           "type": "string",
           "description": "Name of uploaded analysis file"
-        },
-        "pmFileName": {
-          "type": "string",
-          "description": "Name of uploaded pm/memo file"
         },
         "ugKeys": {
           "type": "array",
