@@ -11,22 +11,19 @@
     "/_checkAPIkey": {
       "get": {
         "operationId": "checkAPIkey",
-        "summary": "GET a test endpoint that is protected by api key to validate that consumer has a proper api key",
-        "description": "",
+        "summary": "Test authentication setup",
+        "description": "Secured test endpoint which can be used to validate that a client has a working authentication setup\n\n_(System.checkAPIKey)_",
         "parameters": [],
         "tags": ["system"],
         "responses": {
           "200": {
-            "description": "An empty response",
-            "schema": {
-              "$ref": "#/definitions/UserList"
-            }
+            "description": "The given authentication is **accepted**"
+          },
+          "401": {
+            "description": "This endpoint is secured - **credentials are missing or invalid**."
           },
           "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Unexpected response - internal error"
           }
         },
         "security": [
@@ -45,7 +42,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the round.semester.year.x to get analysis data",
+            "description": "Course Round Analysis Id (Course Code + Semester + _ + Round Id(s)",
             "required": true,
             "type": "string"
           }
@@ -55,7 +52,7 @@
           "200": {
             "description": "List of analyses for course code and all the data",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           },
           "default": {
@@ -77,11 +74,18 @@
         "description": "Saves an analysis object in the database",
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "Course Round Analysis Id (Course Code + Semester + _ + Round Id(s)",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "roundAnalysisData",
             "in": "body",
             "description": "Analysis data  ",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           }
         ],
@@ -109,11 +113,18 @@
         "description": "Saves changes to an analysis in the database",
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "Course Round Analysis Id (Course Code + Semester + _ + Round Id(s)",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "roundAnalysisData",
             "in": "body",
             "description": "Analysis data for a course round(s) round ",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           }
         ],
@@ -153,7 +164,7 @@
           "200": {
             "description": "The analysis was deleted",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           },
           "default": {
@@ -195,7 +206,7 @@
           "200": {
             "description": "Round ids",
             "schema": {
-              "$ref": "#/definitions/usedRoundsForCourseAndSemester"
+              "$ref": "#/definitions/UsedRoundsForCourseAndSemester"
             }
           },
           "default": {
@@ -229,7 +240,7 @@
             "name": "semester",
             "in": "path",
             "description": "Semester code, five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for that semester",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -238,7 +249,7 @@
           "200": {
             "description": "Successfully got analyses for requested course code and semester",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           },
           "default": {
@@ -274,7 +285,7 @@
           "200": {
             "description": "Successfully got published analyses for requested semester",
             "schema": {
-              "$ref": "#/definitions/roundAnalysis"
+              "$ref": "#/definitions/RoundAnalysis"
             }
           },
           "default": {
@@ -304,7 +315,7 @@
     }
   },
   "definitions": {
-    "roundAnalysis": {
+    "RoundAnalysis": {
       "type": "object",
       "required": ["courseCode"],
       "properties": {
@@ -337,8 +348,7 @@
           "description": "Number of registere student for round(s) that semester"
         },
         "examinationGrade": {
-          "type": "array",
-          "items": "string",
+          "type": "string",
           "description": "Precentage of students completed the round(s)"
         },
         "endDate": {
@@ -391,7 +401,7 @@
         },
         "ugKeys": {
           "type": "array",
-          "items": "string",
+          "items": { "type": "string" },
           "description": "UG Keys for user access to edit analysis"
         },
         "syllabusStartTerm": {
@@ -428,22 +438,59 @@
         },
         "ladokUIDs": {
           "type": "array",
-          "description": "The UIDs collected from Ladok"
+          "description": "The UIDs collected from Ladok",
+          "items": { "type": "string" }
         }
+      },
+      "example": {
+        "_id": "XYZ123VT2021_1",
+        "alterationText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus vel urna vel scelerisque. Integer erat risus, rutrum vitae vestibulum et, condimentum vitae nisl.",
+        "analysisFileName": "analysis-XYZ123VT2021-1-20210601-00-01.pdf",
+        "analysisName": "XYZ ( Startdatum 2021-02-01, Svenska ) ",
+        "changedAfterPublishedDate": "",
+        "changedBy": "xyz",
+        "changedDate": "2021-06-01T00:01:01.001Z",
+        "commentChange": "",
+        "commentExam": "<p>Duis neque neque, vestibulum a erat non, viverra posuere dui. Maecenas quis nunc non turpis luctus fringilla. Integer dui est, sodales sit amet dapibus dictum, luctus non purus. Etiam vestibulum tincidunt nulla et blandit.<br />In pellentesque velit at finibus vulputate. Quisque feugiat interdum nulla.</p>",
+        "courseCode": "XYZ123",
+        "endDate": "2021-05-01",
+        "endDateFromLadok": true,
+        "endDateLadok": "2021-05-01",
+        "examinationGrade": "99.0",
+        "examinationGradeFromLadok": true,
+        "examinationGradeLadok": 99,
+        "examinationRounds": "",
+        "examiners": "xyz",
+        "isPublished": "true",
+        "ladokUIDs": ["aa485652-148f-11ec-82a8-0242ac130003"],
+        "programmeCodes": "XYZ",
+        "pdfAnalysisDate": "2021-06-01",
+        "publishedDate": "2021-06-01T01:01:01.001Z",
+        "responsibles": "xyz",
+        "registeredStudents": "xyz",
+        "registeredStudentsFromLadok": true,
+        "registeredStudentsLadok": 100,
+        "roundIdList": "1",
+        "semester": "20211",
+        "syllabusStartTerm": "20211",
+        "ugKeys": ["XYZ123.examiner", "XYZ123.20211.1.courseresponsible"]
       }
     },
-    "usedRoundsForCourseAndSemester": {
+    "UsedRoundsForCourseAndSemester": {
       "properties": {
         "usedRounds": {
           "type": "array",
-          "items": "string",
+          "items": { "type": "string" },
           "description": "List of round ids that have been used for a course semester"
         },
         "publishedAnalysis": {
           "type": "array",
           "items": {
-            "schema": {
-              "$ref": "#/definitions/UsedAnalysis"
+            "type": "object",
+            "properties": {
+              "schema": {
+                "$ref": "#/definitions/UsedAnalysis"
+              }
             }
           },
           "description": "List of published analysis, name, id, UGkeys"
@@ -451,8 +498,11 @@
         "draftAnalysis": {
           "type": "array",
           "items": {
-            "schema": {
-              "$ref": "#/definitions/UsedAnalysis"
+            "type": "object",
+            "properties": {
+              "schema": {
+                "$ref": "#/definitions/UsedAnalysis"
+              }
             }
           },
           "description": "List of draft analysis, name, id, UGkeys"
@@ -475,25 +525,11 @@
         },
         "ugKeys": {
           "type": "array",
-          "items": "string"
+          "items": { "type": "string" }
         }
       }
     },
     "Error": {
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "fields": {
-          "type": "string"
-        }
-      }
-    },
-    "UserList": {
       "properties": {
         "code": {
           "type": "integer",

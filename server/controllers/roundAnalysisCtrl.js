@@ -61,6 +61,7 @@ async function putRoundAnalysis(req, res, next) {
     req.body.changedDate = new Date()
     const dbResponse = await db.updateRoundAnalysis(req.body)
 
+    // eslint-disable-next-line no-underscore-dangle
     log.debug('Successfully updated roundAnalysis', { id: dbResponse._id })
     res.json(dbResponse)
   } catch (err) {
@@ -122,7 +123,7 @@ async function getUsedRounds(req, res, next) {
   const { courseCode, semester } = req.params
   try {
     const dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
-    let returnObject = {
+    const returnObject = {
       usedRounds: [],
       publishedAnalysis: [],
       draftAnalysis: [],
@@ -134,6 +135,7 @@ async function getUsedRounds(req, res, next) {
       tempObject = {
         user: dbResponse[index].changedBy,
         isPublished: dbResponse[index].isPublished,
+        // eslint-disable-next-line no-underscore-dangle
         analysisId: dbResponse[index]._id,
         analysisName: dbResponse[index].analysisName,
         ugKeys: dbResponse[index].ugKeys,
