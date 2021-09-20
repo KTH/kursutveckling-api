@@ -7,7 +7,13 @@
  * *************************************************
  *
  */
-const { getEnv, unpackMongodbConfig, unpackApiKeysConfig, devDefaults } = require('kth-node-configuration')
+const {
+  getEnv,
+  unpackMongodbConfig,
+  unpackApiKeysConfig,
+  devDefaults,
+  unpackNodeApiConfig,
+} = require('kth-node-configuration')
 const { safeGet } = require('safe-utils')
 
 // DEFAULT SETTINGS used for dev, if you want to override these for you local environment, use env-vars in .env
@@ -23,7 +29,7 @@ const devApiKeys = devDefaults('?name=devClient&apiKey=9876&scope=write&scope=re
 module.exports = {
   // The proxy prefix path if the application is proxied. E.g /places
   proxyPrefixPath: {
-    uri: getEnv('SERVICE_PUBLISH', devPrefixPath)
+    uri: getEnv('SERVICE_PUBLISH', devPrefixPath),
   },
   useSsl: safeGet(() => getEnv('SERVER_SSL', devSsl + '').toLowerCase() === 'true'),
   port: getEnv('SERVER_PORT', devPort),
@@ -31,24 +37,32 @@ module.exports = {
   ssl: {
     // In development we don't have SSL feature enabled
     pfx: getEnv('SERVER_CERT_FILE', ''),
-    passphrase: getEnv('SERVER_CERT_PASSPHRASE', '')
+    passphrase: getEnv('SERVER_CERT_PASSPHRASE', ''),
   },
 
   // API keys
   api_keys: unpackApiKeysConfig('KURSUTVECKLINGS_API_KEYS', devApiKeys),
-
+  apiKey: {
+    kursPmDataApi: getEnv('KURS_PM_DATA_API_KEY', devDefaults('1234')),
+  },
+  nodeApi: {
+    kursPmDataApi: unpackNodeApiConfig(
+      'KURS_PM_DATA_API_URI',
+      devDefaults('http://localhost:3002/api/kurs-pm-data?defaultTimeout=10000')
+    ),
+  },
   // Services
   db: unpackMongodbConfig('MONGODB_URI', devMongodb),
 
   // Logging
   logging: {
     log: {
-      level: getEnv('LOGGING_LEVEL', 'debug')
+      level: getEnv('LOGGING_LEVEL', 'debug'),
     },
     accessLog: {
-      useAccessLog: safeGet(() => getEnv('LOGGING_ACCESS_LOG'), 'true') === 'true'
-    }
-  }
+      useAccessLog: safeGet(() => getEnv('LOGGING_ACCESS_LOG'), 'true') === 'true',
+    },
+  },
 
   // Custom app settings
 }

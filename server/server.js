@@ -35,7 +35,7 @@ let logConfiguration = {
   level: config.logging.log.level,
   console: config.logging.console,
   stdout: config.logging.stdout,
-  src: config.logging.src
+  src: config.logging.src,
 }
 log.init(logConfiguration)
 
@@ -92,7 +92,7 @@ require('./database').connect()
 const { addPaths } = require('kth-node-express-routing')
 const { createApiPaths, createSwaggerRedirectHandler, notFoundHandler, errorHandler } = require('kth-node-api-common')
 const swaggerData = require('../swagger.json')
-const { System } = require('./controllers')
+const { System, MigrateMemo } = require('./controllers')
 
 // System pages routes
 const systemRoute = AppRouter()
@@ -101,6 +101,11 @@ systemRoute.get('system.about', config.proxyPrefixPath.uri + '/_about', System.a
 systemRoute.get('system.paths', config.proxyPrefixPath.uri + '/_paths', System.paths)
 systemRoute.get('system.robots', '/robots.txt', System.robotsTxt)
 systemRoute.get('system.swagger', config.proxyPrefixPath.uri + '/swagger.json', System.swagger)
+// migrate
+systemRoute.get('system.migrate', config.proxyPrefixPath.uri + '/_migrate', MigrateMemo.migrate)
+// findConflicts
+systemRoute.get('system.findConflicts', config.proxyPrefixPath.uri + '/_conflicts', MigrateMemo.findConflicts)
+
 server.use('/', systemRoute.getRouter())
 
 // Swagger UI
@@ -117,7 +122,7 @@ addPaths(
   'api',
   createApiPaths({
     swagger: swaggerData,
-    proxyPrefixPathUri: config.proxyPrefixPath.uri
+    proxyPrefixPathUri: config.proxyPrefixPath.uri,
   })
 )
 
@@ -140,6 +145,7 @@ apiRoute.register(paths.api.deleteCourseRoundAnalysisDataById, RoundAnalysis.del
 apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalysisList)
 apiRoute.register(paths.api.getCourseAnalysesForSemester, RoundAnalysis.getCourseAnalyses)
 apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)
+
 server.use('/', apiRoute.getRouter())
 
 // Catch not found and errors
