@@ -12,21 +12,18 @@ const schema = mongoose.Schema({
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Analysis Name can have at most 500 characters.'],
     default: '',
   },
   programmeCodes: {
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Programme Codes can have at most 500 characters.'],
     default: '',
   },
   examiners: {
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Examiners can have at most 500 characters.'],
     default: '',
   },
   responsibles: {
@@ -50,7 +47,6 @@ const schema = mongoose.Schema({
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Examination Grade must have at most 500 characters.'],
     default: '',
   },
   endDate: {
@@ -63,7 +59,6 @@ const schema = mongoose.Schema({
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [2000, 'Alteration Text can have at most 2000 characters.'],
     default: '',
   },
   commentExam: {
@@ -76,7 +71,6 @@ const schema = mongoose.Schema({
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [500, 'Comment Change can have at most 500 characters.'],
     default: '',
   },
   isPublished: {
@@ -123,7 +117,6 @@ const schema = mongoose.Schema({
     type: String,
     trim: true,
     minlength: 0,
-    maxlength: [50, 'Analysis File Name can have at most 50 characters.'],
     default: '',
   },
   ugKeys: {
