@@ -38,16 +38,16 @@ module.exports = {
   api_keys: unpackApiKeysConfig('KURSUTVECKLINGS_API_KEYS', devApiKeys),
 
   // Services
-  db: unpackMongodbConfig('MONGODB_URI', devMongodb),
+  db: { ...unpackMongodbConfig('MONGODB_URI', devMongodb), authDatabase: 'admin' },
 
   // Logging
   logging: {
     log: {
-      level: getEnv('LOGGING_LEVEL', 'debug')
+      level: getEnv('LOGGING_LEVEL', 'debug'),
     },
     accessLog: {
-      useAccessLog: safeGet(() => getEnv('LOGGING_ACCESS_LOG'), 'true') === 'true'
-    }
+      useAccessLog: safeGet(() => getEnv('LOGGING_ACCESS_LOG'), 'true') === 'true',
+    },
   }
 
   // Custom app settings

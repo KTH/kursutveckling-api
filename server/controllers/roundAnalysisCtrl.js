@@ -6,7 +6,7 @@
  * API controller
  */
 
-const log = require('kth-node-log')
+ const log = require('@kth/log')
 const db = require('../lib/database')
 
 async function getRoundAnalysis(req, res, next) {

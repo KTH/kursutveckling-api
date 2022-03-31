@@ -23,17 +23,18 @@ Admin and public pages uses different rights and keys to separate their behaviou
 Only admin pages may change API data while public pages can only read. Therefore while using `Swagger`, a developer should choose the correct api key, because some functions will not be shown in details.
 
 ### Connected Projects
+
 - [kursutveckling-web](https://github.com/KTH/kursinfo-web)
 - [kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web)
 
 ### Related Projects
+
 - [node-api](https://github.com/KTH/node-api)
 - [kursstatistik-api](https://github.com/KTH/kursstatistik-api)
 
-
 ## Prerequisites
 
-- Node.js 12.0.0
+- Node.js 16.0.0
 - Ansible Vault
 
 ### Secrets for Development
@@ -129,7 +130,6 @@ API_KEYS_0=?name=kursutveckling-web&apiKey=[generate a password for public pages
 API_KEYS_1=?name=kursutveckling-admin-web&apiKey=[generate a password for admin page]&scope=write&scope=read
 APPINSIGHTS_INSTRUMENTATIONKEY=[Azure, Application insights, Instrumentation Key, can be found in Overview]
 ```
-
 
 ## Author
 
