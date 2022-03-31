@@ -4,7 +4,7 @@ const { RoundAnalysis } = require('../models/roundAnalysis')
 function fetchRoundAnalysisById(id) {
   if (!id) throw new Error('id must be set')
   log.debug('Fetching analysis by id', { _id: id })
-  return RoundAnalysis.findOne({ _id: id }).populate('courseRoundAnalysis').lean()
+  return RoundAnalysis.aggregate([{ $match: { _id: id } }])
 }
 
 function storeRoundAnalysis(data) {
@@ -34,17 +34,17 @@ function removeRoundAnalysisById(id) {
 function fetchAllRoundAnalysisByCourseCode(courseCode) {
   if (!courseCode) throw new Error('courseCode must be set')
   log.debug('Fetching all roundAnalysis for ' + courseCode)
-  return RoundAnalysis.find({ courseCode }).populate('courseRoundAnalysis').lean()
+  return RoundAnalysis.aggregate([{ $match: { courseCode } }])
 }
 
 function fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester) {
   log.debug('Fetching all roundAnalysis for ' + courseCode + ' filtered by semester: ' + semester)
-  return RoundAnalysis.find({ courseCode, semester }).populate('UsedRoundsForCourseAndSemester').lean()
+  return RoundAnalysis.aggregate([{ $match: { courseCode, semester } }])
 }
 
 function fetchAllPublishedRoundAnalysisBySemester(semester) {
   log.debug('Fetching all round analyses for semester ', semester)
-  return RoundAnalysis.find({ semester, isPublished: true }).populate('courseRoundAnalysis').lean()
+  return RoundAnalysis.aggregate([{ $match: { semester, isPublished: true}}])
 }
 
 module.exports = {
