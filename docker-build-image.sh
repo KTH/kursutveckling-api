@@ -12,7 +12,7 @@ echoYellow "|--------------------------------------------------------|"
 echoYellow "|    Building the Docker image for development env       |"   
 echoYellow "|--------------------------------------------------------|\n"
 
-IMAGE_NAME="kurs-pm-data-api-image"
+IMAGE_NAME="kursutveckling-api-image"
 
 
 if [ "$ENV" == "dev" ]; then
