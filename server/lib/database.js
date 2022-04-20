@@ -4,7 +4,7 @@ const { RoundAnalysis } = require('../models/roundAnalysis')
 function fetchRoundAnalysisById(id) {
   if (!id) throw new Error('id must be set')
   log.debug('Fetching analysis by id', { _id: id })
-  return RoundAnalysis.aggregate([{ $match: { _id: id } }])
+  return RoundAnalysis.findOne({ _id: id })
 }
 
 function storeRoundAnalysis(data) {
@@ -44,7 +44,7 @@ function fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode, semester) {
 
 function fetchAllPublishedRoundAnalysisBySemester(semester) {
   log.debug('Fetching all round analyses for semester ', semester)
-  return RoundAnalysis.aggregate([{ $match: { semester, isPublished: true}}])
+  return RoundAnalysis.aggregate([{ $match: { semester, isPublished: true } }])
 }
 
 module.exports = {
