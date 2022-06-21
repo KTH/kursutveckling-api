@@ -1,7 +1,7 @@
 # Welcome to kursutveckling-api 👋
 
 ![Version](https://img.shields.io/badge/version-0.8.0-blue.svg?cacheSeconds=2592000)
-![Prerequisite](https://img.shields.io/badge/node-12.0.0-blue.svg)
+![Prerequisite](https://img.shields.io/badge/node-16-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
 ## Introduction
@@ -34,7 +34,7 @@ Only admin pages may change API data while public pages can only read. Therefore
 
 ## Prerequisites
 
-- Node.js 16.0.0
+- Node.js 16
 - Ansible Vault
 
 ### Secrets for Development
@@ -55,12 +55,15 @@ These settings are also available in an `env.in` file.
 
 ## Prepara Database in Azure
 
-Create database `admin` and advisible manually set Throughput: 400 (Shared)(Today it is 1000).
+1. Create database `admin` and advisible manually set Throughput: 400 (Shared)(Today it is 1000).
 Name of database will be used in a connection string.
-In this database create a collection `roundanalyses`.
-Change a connection string:
+2. In this database create a collection `roundanalyses`.
+3. Change a connection string by adding name of database (`admin`) after port slush `[port]/` and as a search query after `?` as `authSorce=admin`:
 
-`mongodb://kursutveckling-api-stage-mongodb-kthse:[password]==@kursutveckling-api-stage-mongodb-kthse.documents.azure.com:[port]`~~/?ssl=true&replicaSet=globaldb~~`/admin?ssl=true&authSource=admin`
+`mongodb://kursutveckling-api-stage-mongodb-kthse:[password]==@kursutveckling-api-stage-mongodb-kthse.documents.azure.com:[port]`~~/?ssl=true~~`/admin?ssl=true&authSource=admin`
+
+More information can be found in Confluence: [Om kursen: Databas och API, connection string](https://confluence.sys.kth.se/confluence/x/a4_KC)
+
 
 ## For Development
 
