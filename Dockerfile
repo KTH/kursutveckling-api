@@ -28,6 +28,11 @@ WORKDIR /application
 ENV NODE_PATH /application
 
 #
+# Set user to node
+#
+RUN chown -R node:node /application
+USER node
+#
 # Set timezone
 #
 ENV TZ Europe/Stockholm
@@ -38,23 +43,17 @@ ENV TZ Europe/Stockholm
 #
 # Remember to only install production dependencies.
 #
-COPY ["package.json", "package.json"]
-COPY ["package-lock.json", "package-lock.json"]
-#
-# - Variant 1 - node-gyp not needed:
-RUN npm set-script prepare "" && \
-    npm ci --production --no-optional --unsafe-perm && \
-    npm audit fix --only=prod
+COPY --chown=node:node ["package.json", "package.json"]
+COPY --chown=node:node ["package-lock.json", "package-lock.json"]
 
-# Copy files used by Gulp.
-COPY ["config", "config"]
+RUN npm pkg delete scripts.prepare && \
+    npm ci --production --no-optional --unsafe-perm
 
-COPY ["package.json", "package.json"]
 
-# Copy source files, so changes does not trigger gulp.
-COPY ["app.js", "app.js"]
-COPY ["swagger.json", "swagger.json"]
-COPY ["server", "server"]
+COPY --chown=node:node ["config", "config"]
+COPY --chown=node:node ["app.js", "app.js"]
+COPY --chown=node:node ["swagger.json", "swagger.json"]
+COPY --chown=node:node ["server", "server"]
 
 ENV NODE_PATH /application
 
