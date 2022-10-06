@@ -24,7 +24,7 @@
     "@kth/log": "^4.0.4",
     "@kth/mongo": "^4.0.11",
     "@kth/monitor": "^3.0.26",
-    "@kth/server": "^4.0.3",
+    "@kth/server": "^4.0.4",
     "applicationinsights": "^2.3.4",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
@@ -36,7 +36,7 @@
     "kth-node-api-key-strategy": "^2.0.0",
     "kth-node-configuration": "^2.0.13",
     "kth-node-express-routing": "^2.0.16",
-    "mongoose": "^6.6.1",
+    "mongoose": "^6.6.5",
     "passport": "^0.6.0",
     "safe-utils": "1.0.1",
     "swagger-ui-dist": "^4.14.2"
