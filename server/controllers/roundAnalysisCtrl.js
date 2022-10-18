@@ -6,7 +6,7 @@
  * API controller
  */
 
- const log = require('@kth/log')
+const log = require('@kth/log')
 const db = require('../lib/database')
 
 async function getRoundAnalysis(req, res, next) {
@@ -119,6 +119,35 @@ async function getCourseAnalyses(req, res, next) {
   }
 }
 
+async function getCourseAnalysesForSemestersList(req, res, next) {
+  const { semesters: semestersStr = '' } = req.query
+
+  if (!semestersStr) log.error('semesters must be set')
+  const semesters = semestersStr.split(',')
+  const analyses = []
+  try {
+    for (const semester of semesters) {
+      const semesterAnalyses = await db.fetchAllPublishedRoundAnalysisBySemester(semester)
+      log.debug('Fetch analyses for one semester', {
+        semester,
+        semesterAnalyses,
+        semesterAnalysesLength: semesterAnalyses.length,
+      })
+
+      analyses.push(...semesterAnalyses)
+    }
+
+    log.debug('Successfully got all published analyses for semesters list ', {
+      semesters,
+      analysesNumber: analyses.length,
+    })
+    res.json(analyses)
+  } catch (err) {
+    log.error('Error in getCourseAnalyses', { error: err })
+    next(err)
+  }
+}
+
 async function getUsedRounds(req, res, next) {
   const { courseCode, semester } = req.params
   try {
@@ -172,5 +201,6 @@ module.exports = {
   deleteAnalysis: deleteRoundAnalysis,
   getAnalysisList: getAnalysisListByCourseCode,
   getCourseAnalyses,
+  getCourseAnalysesForSemestersList,
   getUsedRounds,
 }

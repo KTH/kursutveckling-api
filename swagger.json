@@ -296,6 +296,42 @@
           }
         ]
       }
+    },
+    "/v1/courseAnalysesForSemestersList": {
+      "get": {
+        "operationId": "getCourseAnalysesForSemestersList",
+        "summary": "Get a list of published analyses for a list of semesters",
+        "description": "Gets all published analyses for rounds for all semesters provided in query ?semesters[]=20212&semesters[]=29222",
+        "parameters": [
+          {
+            "name": "semester",
+            "in": "query",
+            "description": "Semesters codes, each semester code is five numbers as a string (year + 1 (spring) or 2 (fall). Filter results for these semesters",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["v1"],
+        "responses": {
+          "200": {
+            "description": "Successfully got published analyses for requested semesters",
+            "schema": {
+              "$ref": "#/definitions/RoundAnalysis"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
