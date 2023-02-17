@@ -13,7 +13,7 @@ const monitorSystems = require('@kth/monitor')
 /**
  * * Adds a zero (0) to numbers less then ten (10)
  */
- function zeroPad(value) {
+function zeroPad(value) {
   return value < 10 ? '0' + value : value
 }
 
@@ -45,8 +45,7 @@ function getSwagger (req, res) {
  * GET /swagger
  * Swagger
  */
- function getSwaggerUI(req, res) {
-  
+function getSwaggerUI(req, res) {
   const pathToSwaggerUi = require('swagger-ui-dist').absolutePath()
   const swaggerUrl = configServer.proxyPrefixPath.uri + '/swagger.json'
   const petstoreUrl = 'https://petstore.swagger.io/v2/swagger.json'
@@ -56,14 +55,14 @@ function getSwagger (req, res) {
     .toString()
     .replace(petstoreUrl, swaggerUrl)
 
-    return res.type('text/javascript').send(swaggerInitializerContent)
+  return res.type('text/javascript').send(swaggerInitializerContent)
 }
 
 /**
  * GET /_about
  * About page
  */
-function getAbout (req, res) {
+function getAbout(req, res) {
   const paths = getPaths()
   res.render('system/about', {
     layout: '', // must be empty by some reason
@@ -117,7 +116,7 @@ async function getMonitor(req, res) {
  * GET /robots.txt
  * Robots.txt page
  */
-function getRobotsTxt (req, res) {
+function getRobotsTxt(req, res) {
   res.type('text').render('system/robots')
 }
 
@@ -125,25 +124,24 @@ function getRobotsTxt (req, res) {
  * GET /_paths
  * Return all paths for the system
  */
-function getPathsHandler (req, res) {
+function getPathsHandler(req, res) {
   res.json(getPaths())
 }
 
-function checkAPIKey (req, res) {
+function checkAPIKey(req, res) {
   res.end()
 }
-
 
 /**
  * System controller for functions such as about and monitor.
  * Avoid making changes here in sub-projects.
  */
- module.exports = {
+module.exports = {
   monitor: getMonitor,
   about: getAbout,
   robotsTxt: getRobotsTxt,
   paths: getPathsHandler,
-  checkAPIKey: checkAPIKey,
+  checkAPIKey,
   swagger: getSwagger,
   swaggerUI: getSwaggerUI,
 }
