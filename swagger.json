@@ -426,6 +426,10 @@
           "type": "string",
           "description": "Round id(s) used in analysis"
         },
+        "applicationCodes": {
+          "type": "string",
+          "description": "Application code(s) used in analysis"
+        },
         "analysisFileName": {
           "type": "string",
           "description": "Name of uploaded analysis file"

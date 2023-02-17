@@ -154,11 +154,13 @@ async function getUsedRounds(req, res, next) {
     const dbResponse = await db.fetchAllRoundAnalysisByCourseCodeAndSemester(courseCode.toUpperCase(), semester)
     const returnObject = {
       usedRounds: [],
+      usedApplicationCodes: [],
       publishedAnalysis: [],
       draftAnalysis: [],
     }
 
     let roundIdList = []
+    let applicationCodes = []
     let tempObject = {}
     for (let index = 0; index < dbResponse.length; index++) {
       tempObject = {
@@ -181,6 +183,13 @@ async function getUsedRounds(req, res, next) {
           : [dbResponse[index].roundIdList]
       for (let index2 = 0; index2 < roundIdList.length; index2++) {
         returnObject.usedRounds.push(roundIdList[index2])
+      }
+      applicationCodes =
+        dbResponse[index].applicationCodes && dbResponse[index].applicationCodes.length > 0
+          ? dbResponse[index].applicationCodes.split(',')
+          : [dbResponse[index].applicationCodes]
+      for (let index2 = 0; index2 < applicationCodes.length; index2++) {
+        returnObject.usedApplicationCodes.push(applicationCodes[index2])
       }
     }
     log.debug('Successfully got used round ids for', {

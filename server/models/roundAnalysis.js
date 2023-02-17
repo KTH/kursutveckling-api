@@ -113,6 +113,12 @@ const schema = mongoose.Schema({
     minlength: 0,
     default: '',
   },
+  applicationCodes: {
+    type: String,
+    trim: true,
+    minlength: 0,
+    default: '',
+  },
   analysisFileName: {
     type: String,
     trim: true,
