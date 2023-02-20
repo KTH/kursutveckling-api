@@ -124,14 +124,16 @@ addPaths(
 const authByApiKey = passport.authenticate('apikey', { session: false })
 
 // Application specific API enpoints
+const { ApiRouter } = require('kth-node-express-routing')
 const { RoundAnalysis } = require('./controllers')
-const ApiRouter = require('kth-node-express-routing').ApiRouter
+
 const apiRoute = ApiRouter(authByApiKey)
 const paths = getPaths()
 
 // Api enpoints
 apiRoute.register(paths.api.checkAPIkey, System.checkAPIKey)
 apiRoute.register(paths.api.getCourseRoundAnalysisDataById, RoundAnalysis.getAnalysis)
+apiRoute.register(paths.api.getAllRoundAnalysis, RoundAnalysis.getAllRoundAnalysis)
 apiRoute.register(paths.api.postCourseRoundAnalysisDataById, RoundAnalysis.postAnalysis)
 apiRoute.register(paths.api.putCourseRoundAnalysisDataById, RoundAnalysis.putAnalysis)
 apiRoute.register(paths.api.deleteCourseRoundAnalysisDataById, RoundAnalysis.deleteAnalysis)

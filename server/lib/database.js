@@ -7,6 +7,11 @@ function fetchRoundAnalysisById(id) {
   return RoundAnalysis.findOne({ _id: id })
 }
 
+function fetchAllRoundAnalysis() {
+  log.debug('Fetching all analysis')
+  return RoundAnalysis.find()
+}
+
 function storeRoundAnalysis(data) {
   if (!data) throw new Error('data must be set in _storeRoundAnalysis')
   else {
@@ -49,6 +54,7 @@ function fetchAllPublishedRoundAnalysisBySemester(semester) {
 
 module.exports = {
   fetchRoundAnalysisById,
+  fetchAllRoundAnalysis,
   storeRoundAnalysis,
   updateRoundAnalysis,
   removeRoundAnalysisById,

@@ -28,6 +28,34 @@
         "security": [{ "api_key": ["read"] }]
       }
     },
+    "/v1/getAllRoundAnalysis": {
+      "get": {
+        "operationId": "getAllRoundAnalysis",
+        "summary": "Get a list of all analysis connected",
+        "description": "Get a list of all analysis connected",
+        "parameters": [],
+        "tags": ["v1"],
+        "responses": {
+          "200": {
+            "description": "List of analyses for course code and all the data",
+            "schema": {
+              "$ref": "#/definitions/RoundAnalysis"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": ["read"]
+          }
+        ]
+      }
+    },
     "/v1/courseRoundAnalysis/{id}": {
       "get": {
         "operationId": "getCourseRoundAnalysisDataById",

@@ -26,6 +26,20 @@ async function getRoundAnalysis(req, res, next) {
   }
 }
 
+async function getAllRoundAnalysis(req, res, next) {
+  try {
+    let doc = {}
+    doc = await db.fetchAllRoundAnalysis()
+    if (!doc) {
+      return next()
+    }
+    log.debug('Total round analysis fetched: ', doc.length)
+    res.json(doc)
+  } catch (err) {
+    next(err)
+  }
+}
+
 async function postRoundAnalysis(req, res, next) {
   try {
     const { _id: id } = req.body
@@ -205,6 +219,7 @@ async function getUsedRounds(req, res, next) {
 
 module.exports = {
   getAnalysis: getRoundAnalysis,
+  getAllRoundAnalysis,
   postAnalysis: postRoundAnalysis,
   putAnalysis: putRoundAnalysis,
   deleteAnalysis: deleteRoundAnalysis,
