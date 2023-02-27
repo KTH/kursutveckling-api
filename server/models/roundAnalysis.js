@@ -107,12 +107,6 @@ const schema = mongoose.Schema({
     minlength: 0,
     default: '',
   },
-  roundIdList: {
-    type: String,
-    trim: true,
-    minlength: 0,
-    default: '',
-  },
   applicationCodes: {
     type: String,
     trim: true,
