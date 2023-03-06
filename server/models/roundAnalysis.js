@@ -107,7 +107,7 @@ const schema = mongoose.Schema({
     minlength: 0,
     default: '',
   },
-  roundIdList: {
+  applicationCodes: {
     type: String,
     trim: true,
     minlength: 0,

@@ -422,9 +422,9 @@
           "type": "string",
           "description": "Course semester for analysis"
         },
-        "roundIdList": {
+        "applicationCodes": {
           "type": "string",
-          "description": "Round id(s) used in analysis"
+          "description": "Application code(s) used in analysis"
         },
         "analysisFileName": {
           "type": "string",
@@ -501,7 +501,7 @@
         "registeredStudents": "xyz",
         "registeredStudentsFromLadok": true,
         "registeredStudentsLadok": 100,
-        "roundIdList": "1",
+        "applicationCodes": "1",
         "semester": "20211",
         "syllabusStartTerm": "20211",
         "ugKeys": ["XYZ123.examiner", "XYZ123.20211.1.courseresponsible"]
