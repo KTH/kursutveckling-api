@@ -5,7 +5,7 @@ services:
     image: $LOCAL_IMAGE_ID
 
     volumes:
-      - ${WORKSPACE}/test:/application/test
+      - ./test:/application/test
 
     tty: true
 
