@@ -34,3 +34,9 @@ node_modules/*
 
 # test coverage
 coverage
+
+# cypress files
+cypress.env.json
+cypress/videos
+cypress/screenshots
+cypress/downloads
