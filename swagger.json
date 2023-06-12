@@ -301,7 +301,7 @@
       "get": {
         "operationId": "getCourseAnalysesForSemestersList",
         "summary": "Get a list of published analyses for a list of semesters",
-        "description": "Gets all published analyses for rounds for all semesters provided in query ?semesters[]=20212&semesters[]=29222",
+        "description": "Gets all published analyses for rounds for all semesters provided in query ?semesters=20212,29222",
         "parameters": [
           {
             "name": "semester",
