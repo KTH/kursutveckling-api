@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.overwrite('request', (originalFn, options) => {
+  const api_key = Cypress.env('KURSUTVECKLING_API_KEY')
+  const optionHeaders = options.headers ?? {}
+
+  return originalFn({
+    ...options,
+    headers: {
+      api_key,
+      ...optionHeaders,
+    },
+  })
+})

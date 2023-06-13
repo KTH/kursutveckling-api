@@ -3,7 +3,6 @@ context('Checks default endpoints', () => {
     cy.request({
       method: 'GET',
       url: '/_checkApiKey',
-      headers: Cypress.env('headers'),
     }).then(response => {
       expect(response.status).to.eq(200)
     })
@@ -12,7 +11,6 @@ context('Checks default endpoints', () => {
     cy.request({
       method: 'GET',
       url: '/_monitor?probe=full',
-      headers: Cypress.env('headers'),
     }).then(response => {
       expect(response.status).to.eq(200)
       expect(response.body).to.contain(`APPLICATION_STATUS: OK`)

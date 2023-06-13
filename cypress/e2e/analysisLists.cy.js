@@ -14,7 +14,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: getAnalysisListByCourseCodeUrl(semester1),
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.length).to.eq(0)
@@ -27,7 +26,6 @@ context('Checks list endpoints', () => {
         .request({
           method: 'POST',
           url: `/v1/courseRoundAnalysis/${_id}`,
-          headers: Cypress.env('headers'),
           body: {
             _id,
             courseCode,
@@ -47,7 +45,6 @@ context('Checks list endpoints', () => {
         .request({
           method: 'POST',
           url: `/v1/courseRoundAnalysis/${_id}`,
-          headers: Cypress.env('headers'),
           body: {
             _id,
             courseCode,
@@ -65,7 +62,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: getAnalysisListByCourseCodeUrl(semester1),
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.length).to.eq(4)
@@ -76,7 +72,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: `/v1/courseAnalyses/${semester1}`,
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.length).to.eq(4)
@@ -87,7 +82,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: `/v1/courseAnalyses/${semester2}`,
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.length).to.eq(2)
@@ -98,7 +92,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: `/v1/courseAnalysesForSemestersList?semesters=${semester1},${semester2}`,
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.length).to.eq(6)
@@ -109,7 +102,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'GET',
       url: `/v1/usedRoundsForCourse/${courseCode}/semester/${semester1}`,
-      headers: Cypress.env('headers'),
     }).then(({ status, body }) => {
       expect(status).to.eq(200)
       expect(body.publishedAnalysis.length).to.eq(4)
@@ -122,7 +114,6 @@ context('Checks list endpoints', () => {
     cy.request({
       method: 'DELETE',
       url: `/v1/courseRoundAnalysis/${_id}`,
-      headers: Cypress.env('headers'),
     })
 
   it('Teardown', () => {
