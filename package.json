@@ -35,7 +35,7 @@
     "kth-node-api-key-strategy": "^2.0.3",
     "kth-node-configuration": "^2.0.13",
     "kth-node-express-routing": "^2.0.16",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.2",
     "mongoose": "^8.0.3",
     "passport": "^0.7.0",
     "safe-utils": "1.0.1",
