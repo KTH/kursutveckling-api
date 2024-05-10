@@ -45,7 +45,7 @@ Secrets during local development are ALWAYS stored in a `.env`-file in the root 
 MONGODB_URI=mongodb://kursutveckling-api-stage-mongodb-kthse:[password, specified in Azure]==@kursutveckling-api-stage-mongodb-kthse.documents.azure.com:[port, specified in Azure]/admin?ssl=true&authSource=admin
 API_KEYS_0=?name=kursutveckling-web&apiKey=[generate a password for public pages]&scope=read
 API_KEYS_1=?name=kursutveckling-admin-web&apiKey=[generate a password for admin page]&scope=write&scope=read
-APPINSIGHTS_INSTRUMENTATIONKEY=[Azure, Application insights, Instrumentation Key, can be found in Overview]
+APPLICATIONINSIGHTS_CONNECTION_STRING=[Azure, Application insights, connection string, can be found in Overview]
 USE_COSMOS_DB='true'
 LOGGING_ACCESS_LOG=debug
 SERVER_PORT=3001 [if you want to change port]
@@ -131,7 +131,7 @@ Password find in gsv-key vault
 MONGODB_URI=mongodb://kursutveckling-api-stage-mongodb-kthse:[password, specified in Azure]==@kursutveckling-api-stage-mongodb-kthse.documents.azure.com:[port, specified in Azure]/admin?ssl=true&authSource=admin
 API_KEYS_0=?name=kursutveckling-web&apiKey=[generate a password for public pages]&scope=read
 API_KEYS_1=?name=kursutveckling-admin-web&apiKey=[generate a password for admin page]&scope=write&scope=read
-APPINSIGHTS_INSTRUMENTATIONKEY=[Azure, Application insights, Instrumentation Key, can be found in Overview]
+APPLICATIONINSIGHTS_CONNECTION_STRING=[Azure, Application insights, connection string, can be found in Overview]
 ```
 
 ## Author
