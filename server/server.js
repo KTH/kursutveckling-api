@@ -138,6 +138,13 @@ apiRoute.register(paths.api.deleteCourseRoundAnalysisDataById, RoundAnalysis.del
 
 apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalysisList)
 apiRoute.register(paths.api.getCourseAnalysesForSemester, RoundAnalysis.getCourseAnalyses)
+
+apiRoute.register(paths.api.getCanvasAnalysisListByCourseCode, RoundAnalysis.getCanvasAnalysisListByCourseCode)
+apiRoute.register(
+  paths.api.getKursinfoadminAnalysisListByCourseCode,
+  RoundAnalysis.getKursinfoadminAnalysisListByCourseCode
+)
+
 // courseAnalysesForSemestersList
 apiRoute.register(paths.api.getCourseAnalysesForSemestersList, RoundAnalysis.getCourseAnalysesForSemestersList)
 apiRoute.register(paths.api.getUsedRounds, RoundAnalysis.getUsedRounds)

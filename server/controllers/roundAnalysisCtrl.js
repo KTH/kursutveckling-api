@@ -193,6 +193,32 @@ async function getUsedRounds(req, res, next) {
   }
 }
 
+async function getCanvasAnalysisListByCourseCode(req, res, next) {
+  const courseCode = req.params.courseCode.toUpperCase()
+  let dbResponse
+  try {
+    dbResponse = await db.fetchAllCanvasRoundAnalysesByCourseCode(courseCode)
+    log.debug('Successfully got all analyses for', { courseCode, dbResponse })
+    res.json(dbResponse)
+  } catch (err) {
+    log.error('Error in getCanvasAnalysisListByCourseCode', { error: err })
+    next(err)
+  }
+}
+
+async function getKursinfoadminAnalysisListByCourseCode(req, res, next) {
+  const courseCode = req.params.courseCode.toUpperCase()
+  let dbResponse
+  try {
+    dbResponse = await db.fetchAllKursinfoadminRoundAnalysesByCourseCode(courseCode)
+    log.debug('Successfully got all analyses for', { courseCode, dbResponse })
+    res.json(dbResponse)
+  } catch (err) {
+    log.error('Error in getKursinfoadminAnalysisListByCourseCode', { error: err })
+    next(err)
+  }
+}
+
 module.exports = {
   getAnalysis: getRoundAnalysis,
   postAnalysis: postRoundAnalysis,
@@ -202,4 +228,6 @@ module.exports = {
   getCourseAnalyses,
   getCourseAnalysesForSemestersList,
   getUsedRounds,
+  getCanvasAnalysisListByCourseCode,
+  getKursinfoadminAnalysisListByCourseCode,
 }
