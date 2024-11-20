@@ -22,12 +22,12 @@ jest.mock('../../server/lib/database', () => {
     },
     fetchAllRoundAnalysisByCourseCode: jest.fn(),
     fetchAllPublishedRoundAnalysisBySemester: jest.fn(),
-    fetchAllCanvasRoundAnalysesByCourseCode(courseCode) {
+    fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode) {
       return new Promise((resolve, reject) => {
         resolve({ status: 201 })
       })
     },
-    fetchAllKursinfoadminRoundAnalysesByCourseCode(courseCode) {
+    fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode) {
       return new Promise((resolve, reject) => {
         resolve({ status: 201 })
       })
@@ -156,11 +156,11 @@ describe('Test functions of roundAnalysisCtrl.js', () => {
     expect(res.json).toHaveBeenCalledTimes(1)
   })
 
-  test('getKursinfoadminAnalysisListByCourseCode', async () => {
-    const { getKursinfoadminAnalysisListByCourseCode } = require('../../server/controllers/roundAnalysisCtrl')
+  test('getAdminWebAnalysisListByCourseCode', async () => {
+    const { getAdminWebAnalysisListByCourseCode } = require('../../server/controllers/roundAnalysisCtrl')
     const req = buildReq({ params: { courseCode: 'ef1111' } })
     const res = buildRes()
-    const response = await getKursinfoadminAnalysisListByCourseCode(req, res)
+    const response = await getAdminWebAnalysisListByCourseCode(req, res)
     expect(res.json).toHaveBeenCalledTimes(1)
   })
 })

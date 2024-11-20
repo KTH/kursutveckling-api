@@ -369,11 +369,11 @@
         ]
       }
     },
-    "/v1/kursinfoadminCourseAnalysisList/{courseCode}": {
+    "/v1/adminWebCourseAnalysisList/{courseCode}": {
       "get": {
-        "operationId": "getKursinfoadminAnalysisListByCourseCode",
+        "operationId": "getAdminWebAnalysisListByCourseCode",
         "summary": "Get a list of analyses for a course",
-        "description": "Get a list of analyses for a course round published in Kursinfoadmin Tool",
+        "description": "Get a list of analyses for a course round published in the old analysis admin tool \"Kursanalys och kursdata\" previously found in kursutveckling-admin-web.",
         "parameters": [
           {
             "name": "courseCode",

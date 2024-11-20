@@ -197,7 +197,7 @@ async function getCanvasAnalysisListByCourseCode(req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
   let dbResponse
   try {
-    dbResponse = await db.fetchAllCanvasRoundAnalysesByCourseCode(courseCode)
+    dbResponse = await db.fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode)
     log.debug('Successfully got all analyses for', { courseCode, dbResponse })
     res.json(dbResponse)
   } catch (err) {
@@ -206,15 +206,15 @@ async function getCanvasAnalysisListByCourseCode(req, res, next) {
   }
 }
 
-async function getKursinfoadminAnalysisListByCourseCode(req, res, next) {
+async function getAdminWebAnalysisListByCourseCode(req, res, next) {
   const courseCode = req.params.courseCode.toUpperCase()
   let dbResponse
   try {
-    dbResponse = await db.fetchAllKursinfoadminRoundAnalysesByCourseCode(courseCode)
+    dbResponse = await db.fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode)
     log.debug('Successfully got all analyses for', { courseCode, dbResponse })
     res.json(dbResponse)
   } catch (err) {
-    log.error('Error in getKursinfoadminAnalysisListByCourseCode', { error: err })
+    log.error('Error in getAdminWebAnalysisListByCourseCode', { error: err })
     next(err)
   }
 }
@@ -229,5 +229,5 @@ module.exports = {
   getCourseAnalysesForSemestersList,
   getUsedRounds,
   getCanvasAnalysisListByCourseCode,
-  getKursinfoadminAnalysisListByCourseCode,
+  getAdminWebAnalysisListByCourseCode,
 }

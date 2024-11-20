@@ -140,10 +140,7 @@ apiRoute.register(paths.api.getAnalysisListByCourseCode, RoundAnalysis.getAnalys
 apiRoute.register(paths.api.getCourseAnalysesForSemester, RoundAnalysis.getCourseAnalyses)
 
 apiRoute.register(paths.api.getCanvasAnalysisListByCourseCode, RoundAnalysis.getCanvasAnalysisListByCourseCode)
-apiRoute.register(
-  paths.api.getKursinfoadminAnalysisListByCourseCode,
-  RoundAnalysis.getKursinfoadminAnalysisListByCourseCode
-)
+apiRoute.register(paths.api.getAdminWebAnalysisListByCourseCode, RoundAnalysis.getAdminWebAnalysisListByCourseCode)
 
 // courseAnalysesForSemestersList
 apiRoute.register(paths.api.getCourseAnalysesForSemestersList, RoundAnalysis.getCourseAnalysesForSemestersList)
