@@ -47,6 +47,18 @@ function fetchAllPublishedRoundAnalysisBySemester(semester) {
   return RoundAnalysis.aggregate([{ $match: { semester, isPublished: true } }])
 }
 
+function fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode) {
+  if (!courseCode) throw new Error('courseCode must be set')
+  log.debug('Fetching published round analyses for ' + courseCode + ' from Canvas')
+  return RoundAnalysis.aggregate([{ $match: { courseCode, analysisType: 'canvas' } }])
+}
+
+function fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode) {
+  if (!courseCode) throw new Error('courseCode must be set')
+  log.debug('Fetching published round analyses for ' + courseCode + ' from AdminWeb')
+  return RoundAnalysis.aggregate([{ $match: { courseCode, isPublished: true, analysisType: { $ne: 'canvas' } } }])
+}
+
 module.exports = {
   fetchRoundAnalysisById,
   storeRoundAnalysis,
@@ -55,4 +67,6 @@ module.exports = {
   fetchAllRoundAnalysisByCourseCode,
   fetchAllRoundAnalysisByCourseCodeAndSemester,
   fetchAllPublishedRoundAnalysisBySemester,
+  fetchPublishedCanvasRoundAnalysesByCourseCode,
+  fetchPublishedAdminWebRoundAnalysesByCourseCode,
 }
