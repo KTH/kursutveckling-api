@@ -29,7 +29,7 @@ Only admin pages may change API data while public pages can only read. Therefore
 ### Connected Projects
 
 - [kursutveckling-web](https://github.com/KTH/kursinfo-web)
-*- [kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web) (Discontinued in March 2025)*
+- *~~[kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web)~~ (Discontinued in March 2025)*
 - [kursutveckling-integration-api](https://github.com/KTH/ursutveckling-integration-api)
 
 ### Related Projects
