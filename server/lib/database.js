@@ -49,13 +49,13 @@ function fetchAllPublishedRoundAnalysisBySemester(semester) {
 
 function fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode) {
   if (!courseCode) throw new Error('courseCode must be set')
-  log.debug('Fetching all round analyses for ' + courseCode + ' from Canvas')
+  log.debug('Fetching published round analyses for ' + courseCode + ' from Canvas')
   return RoundAnalysis.aggregate([{ $match: { courseCode, analysisType: 'canvas' } }])
 }
 
 function fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode) {
   if (!courseCode) throw new Error('courseCode must be set')
-  log.debug('Fetching all round analyses for ' + courseCode + ' from AdminWeb')
+  log.debug('Fetching published round analyses for ' + courseCode + ' from AdminWeb')
   return RoundAnalysis.aggregate([{ $match: { courseCode, isPublished: true, analysisType: { $ne: 'canvas' } } }])
 }
 
