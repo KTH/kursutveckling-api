@@ -12,6 +12,10 @@ Kursutveckling-api is a microservice to save course's analyses data to database,
 
 It uses [Node.js](https://nodejs.org/), [Mongoose](https://mongoosejs.com/), `kth-node-mongo`, and is based on [node-api](https://github.com/KTH/node-api).
 
+*Please note!* 
+
+*In March 2025, the tool "Kursanalys och kursdata"([kursutveckling-admin-web](https://github.com/KTH/kursutveckling-admin-web)) for publishing and editing course analysis and course data will be discontinued. Last use is for courses taken during study period 2 in Autumn 2024. From study period 3 in Spring 2025, course analysis is filled in and published in Canvas. The integration function ([kursutveckling-integration-api](https://github.com/KTH/kursutveckling-integration-api)) fetches and populates from then on the database with analysis data used by this repo's api `kursutveckling-api`.*
+
 ### 🏠 [Homepage](https://github.com/KTH/kursutveckling-api)
 
 ## Overview
@@ -25,7 +29,8 @@ Only admin pages may change API data while public pages can only read. Therefore
 ### Connected Projects
 
 - [kursutveckling-web](https://github.com/KTH/kursinfo-web)
-- [kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web)
+*- [kursutveckling-admin-web](https://github.com/KTH/kursinfo-admin-web) (Discontinued in March 2025)*
+- [kursutveckling-integration-api](https://github.com/KTH/ursutveckling-integration-api)
 
 ### Related Projects
 
