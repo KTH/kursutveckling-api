@@ -194,10 +194,10 @@ async function getUsedRounds(req, res, next) {
 }
 
 async function getCanvasAnalysisListByCourseCode(req, res, next) {
-  const courseCode = req.params.courseCode.toUpperCase()
+  const { courseCode } = req.params
   let dbResponse
   try {
-    dbResponse = await db.fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode)
+    dbResponse = await db.fetchPublishedCanvasRoundAnalysesByCourseCode(courseCode.toUpperCase())
     log.debug('Successfully got all analyses for', { courseCode, dbResponse })
     res.json(dbResponse)
   } catch (err) {
@@ -207,10 +207,10 @@ async function getCanvasAnalysisListByCourseCode(req, res, next) {
 }
 
 async function getAdminWebAnalysisListByCourseCode(req, res, next) {
-  const courseCode = req.params.courseCode.toUpperCase()
+  const { courseCode } = req.params
   let dbResponse
   try {
-    dbResponse = await db.fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode)
+    dbResponse = await db.fetchPublishedAdminWebRoundAnalysesByCourseCode(courseCode.toUpperCase())
     log.debug('Successfully got all analyses for', { courseCode, dbResponse })
     res.json(dbResponse)
   } catch (err) {
